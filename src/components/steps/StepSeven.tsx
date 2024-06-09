@@ -10,7 +10,7 @@ import { setCustomerDetailPhone } from "@/redux/features/customer-detail/custome
 
 const FormSchema = Yup.object().shape({
   phone: Yup.string()
-    .matches(/^(+\d{1,3}[- ]?)?\d{10}$/, "Phone number is not valid")
+    .matches(/^\+?\d{10,14}$/, "Phone number is not valid")
     .required("You must enter the phone number"),
 });
 
