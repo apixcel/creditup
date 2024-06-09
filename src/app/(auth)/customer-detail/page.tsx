@@ -10,7 +10,9 @@ import * as Yup from "yup";
 // Define the validation schema using Yup
 const FormSchema = Yup.object().shape({
   customerName: Yup.string().required("Customer name is required"),
-  phone: Yup.string().required("Mobile number is required"),
+  phone: Yup.string()
+    .matches(/^\+?\d{10,14}$/, "Phone number is not valid")
+    .required("Mobile number is required"),
   address: Yup.string().required("Address is required"),
   postCode: Yup.string().required("Post code is required"),
 });
