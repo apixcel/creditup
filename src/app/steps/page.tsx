@@ -1,3 +1,5 @@
+import StepEight from "@/components/steps/StepEight";
+import StepEleven from "@/components/steps/StepEleven";
 import StepFive from "@/components/steps/StepFive";
 import StepFour from "@/components/steps/StepFour";
 import StepNine from "@/components/steps/StepNine";
@@ -8,8 +10,11 @@ import StepTen from "@/components/steps/StepTen";
 import StepThree from "@/components/steps/StepThree";
 import StepTwelve from "@/components/steps/StepTwelve";
 import StepTwo from "@/components/steps/StepTwo";
+import { useAppSelector } from "@/redux/hook";
 
 const Steps = () => {
+  const { step } = useAppSelector((state) => state.customer);
+
   return (
     <div className="py-[80px]">
       <StepOne />
@@ -19,8 +24,10 @@ const Steps = () => {
       <StepFive />
       <StepSix />
       <StepSeven />
+      <StepEight />
       <StepNine />
       <StepTen />
+      <StepEleven />
       <StepTwelve />
     </div>
   );
