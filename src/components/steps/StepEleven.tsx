@@ -6,14 +6,15 @@ import StepBody from "../shared/StepBody";
 import Input from "./Input";
 import { useAppDispatch } from "@/redux/hook";
 import { setCreditUp } from "@/redux/features/customer-detail/customerDetailSlice";
+import { AnyARecord } from "dns";
 
 const FormSchema = Yup.object().shape({
   lender1: Yup.string().required("You must enter the lender 1"),
   outStandingBalance: Yup.string().required(
-    "You must enter the outStandingBalance"
+    "You must enter the outstanding balance"
   ),
-  contribute: Yup.string().required("You must enter the contribute"),
-  anotherLander: Yup.string().required("You must enter the anotherLander"),
+  contribute: Yup.string().required("You must enter the contribution"),
+  anotherLender: Yup.string().required("You must enter another lender"),
 });
 
 const StepEleven = () => {
@@ -23,15 +24,16 @@ const StepEleven = () => {
     lender1: "",
     outStandingBalance: "",
     contribute: "",
-    anotherLander: "",
+    anotherLender: "",
   };
+
   const handleSubmit = (values: any) => {
     console.log(values);
     dispatch(setCreditUp(values));
   };
 
   return (
-    <StepBody title="Which lenders do you owe money too? If the account is with a debt collector, who is it?">
+    <StepBody title="Which lenders do you owe money to? If the account is with a debt collector, who is it?">
       <Formik
         initialValues={initialValue}
         validationSchema={FormSchema}
@@ -55,12 +57,15 @@ const StepEleven = () => {
             isCenter={true}
             title="Add another Lender"
             name="anotherLender"
-            id="anotherLander"
+            id="anotherLender"
           />
-          <p className="text-center text-[16px] leading-[26px] font-light italic">
-            After the customer has filled out all their debt information a
-            summary should be shown such as;
+          <p className="text-center text-[16px] leading-[26px] font-light italic max-w-[586px] mx-auto">
+            After the customer has filled out all their debt information, a
+            summary should be shown such as:
           </p>
+          <div>
+            <div className=""></div>
+          </div>
           <button type="submit" className="btn mt-10">
             Continue
           </button>
