@@ -5,9 +5,15 @@ import { setCustomer } from "@/redux/features/customer-detail/customerDetailSlic
 import { useAppDispatch } from "@/redux/hook";
 import { CustomerType } from "@/types/CustomerDetailType";
 import { Form, Formik } from "formik";
-import { useState } from "react";
+import * as Yup from "yup";
 
-
+// Define the validation schema using Yup
+const FormSchema = Yup.object().shape({
+  customerName: Yup.string().required("Customer name is required"),
+  phone: Yup.string().required("Mobile number is required"),
+  address: Yup.string().required("Address is required"),
+  postCode: Yup.string().required("Post code is required"),
+});
 
 const initialValues = {
   customerName: "",
@@ -17,17 +23,20 @@ const initialValues = {
 };
 
 const Page = () => {
-  // const [showPass, setShowPass] = useState(true);
   const dispatch = useAppDispatch();
 
-  const handleForm = (e:CustomerType) => {
-    console.log(e);
-    dispatch(setCustomer(e))
+  const handleForm = (values: CustomerType) => {
+    console.log(values);
+    dispatch(setCustomer(values));
   };
 
   return (
     <Card heading="Customer Details">
-      <Formik initialValues={initialValues} onSubmit={(e) => handleForm(e)}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={FormSchema} // Pass the validation schema to Formik
+        onSubmit={(values) => handleForm(values)}
+      >
         {({ errors, touched }) => (
           <Form className="w-full mt-[40px] mx-auto flex flex-col gap-[20px]">
             <div className="flex flex-col md:flex-row gap-[22px]">
@@ -66,7 +75,7 @@ const Page = () => {
               type="submit"
               className="bg-primary text-white px-5 py-3 mb-5 rounded-md disabled:bg-gray-400"
             >
-              submit
+              Submit
             </button>
           </Form>
         )}

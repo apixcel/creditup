@@ -44,7 +44,7 @@ export type CustomerInfoType = {
   customerDetail: CustomerDetailType;
   customerAddress: CustomerAddressType;
   creditUp: CreditUpType;
-  step: 0
+  step: number;
 };
 
 export const CustomerInfo: CustomerInfoType = {
@@ -80,7 +80,7 @@ export const CustomerInfo: CustomerInfoType = {
     outstandingBalance: 0,
     contribute: 0,
   },
-  step: 0
+  step: 1,
 };
 
 const initialState: CustomerInfoType | null = CustomerInfo;
@@ -91,16 +91,17 @@ const customerSlice = createSlice({
     setCustomer(state, action: PayloadAction<CustomerType>) {
       state.customer = action.payload;
       state.step++;
-      
     },
     setCustomerDetailDescribe(
       state,
       action: PayloadAction<{ describe: string }>
     ) {
       state.customerDetail.describe = action.payload.describe;
+      state.step++;
     },
     setCustomerDetailTitle(state, action: PayloadAction<{ title: string }>) {
       state.customerDetail.title = action.payload.title;
+      state.step++;
     },
     setCustomerDetailFirstName(
       state,
@@ -108,6 +109,8 @@ const customerSlice = createSlice({
     ) {
       state.customerDetail.firstName = action.payload.firstName;
       state.customerDetail.lastName = action.payload.lastName;
+
+      state.step++;
     },
 
     setCustomerDetailDateOfBirth(
@@ -115,36 +118,46 @@ const customerSlice = createSlice({
       action: PayloadAction<{ dateOfBirth: string }>
     ) {
       state.customerDetail.dateOfBirth = action.payload.dateOfBirth;
+      state.step++;
     },
     setCustomerDetailEmail(state, action: PayloadAction<{ email: string }>) {
       state.customerDetail.email = action.payload.email;
+      state.step++;
     },
     setCustomerDetailPassword(
       state,
       action: PayloadAction<{ password: string }>
     ) {
       state.customerDetail.password = action.payload.password;
+
+      state.step++;
     },
     setCustomerDetailLastName(state, action: PayloadAction<{ phone: string }>) {
       state.customerDetail.phone = action.payload.phone;
+      state.step++;
     },
     setCustomerAddress(state, action: PayloadAction<CustomerAddressType>) {
       state.customerAddress = action.payload;
+      state.step++;
     },
     setCustomerDetailStatus(state, action: PayloadAction<{ status: string }>) {
       state.customerDetail.status = action.payload.status;
+      state.step++;
     },
     setCustomerDetailTotal(state, action: PayloadAction<{ total: string }>) {
       state.customerDetail.total = action.payload.total;
+      state.step++;
     },
     setCreditUp(state, action: PayloadAction<CreditUpType>) {
       state.creditUp = action.payload;
+      state.step++;
     },
     setCustomerDetailPaymentDate(
       state,
       action: PayloadAction<{ paymentDate: string }>
     ) {
       state.customerDetail.paymentDate = action.payload.paymentDate;
+      state.step++;
     },
   },
 });
