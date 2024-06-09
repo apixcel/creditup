@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .combined {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.241);
+    color: rgba(255, 255, 255, 0);
+    font-size: 15.5vw;
+    font-weight: 600;
+    cursor: default;
+    line-height: 80%;
+    width: max-content;
+  }
+  .bg {
+    background: #17181f;
+  }
+
+  .right {
+    margin-left: auto;
+  }
+
+  .card_one {
+    animation: animate 1.5s ease-in-out infinite alternate;
+  }
+  .card_two {
+    animation: animate 2s ease-in-out infinite alternate;
+  }
+  .card_three {
+    animation: animate 1.4s ease-in-out infinite alternate;
+  }
+  .card_four {
+    animation: animate 1.7s ease-in-out infinite alternate;
+  }
+  .card_five {
+    animation: animate 2.5s ease-in-out infinite alternate;
+  }
+  .card_six {
+    animation: animate 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes animate {
+    to {
+      transform: translateX(-20px);
+    }
+  }
+
+  .rounded-none.border-b.border-metal-100 {
+    padding: 20px !important;
+  }
+}
