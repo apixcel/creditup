@@ -37,7 +37,7 @@ const StepSix = () => {
         validationSchema={FormSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
+        <Form className="flex flex-col gap-[20px]">
           <Warning text="At least 8 characters, with 1 uppercase letter, 1 lowercase letter and numbers" />
           <Input
             title="Password"

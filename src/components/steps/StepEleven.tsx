@@ -1,12 +1,11 @@
 "use client";
 
+import { setCreditUp } from "@/redux/features/customer-detail/customerDetailSlice";
+import { useAppDispatch } from "@/redux/hook";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import StepBody from "../shared/StepBody";
 import Input from "./Input";
-import { useAppDispatch } from "@/redux/hook";
-import { setCreditUp } from "@/redux/features/customer-detail/customerDetailSlice";
-import { AnyARecord } from "dns";
 
 const FormSchema = Yup.object().shape({
   lender: Yup.string().required("You must enter the lender 1"),
@@ -22,13 +21,13 @@ const StepEleven = () => {
 
   const initialValue = {
     lender: "",
-    outstandingBalance: 0,
-    contribute: 0,
-    anotherLander: 0,
+    outstandingBalance: "",
+    contribute: "",
+    anotherLender: "",
   };
 
   const handleSubmit = (values: any) => {
-    console.log("lander",values);
+    console.log("lender", values);
     dispatch(setCreditUp(values));
   };
 
@@ -56,18 +55,18 @@ const StepEleven = () => {
           <Input
             isCenter={true}
             title="Add another Lender"
-            name="anotherLander"
-            id="anotherLander"
+            name="anotherLender"
+            id="anotherLender"
           />
           <p className="text-center text-[16px] leading-[26px] font-light italic max-w-[586px] mx-auto">
             After the customer has filled out all their debt information, a
             summary should be shown such as:
           </p>
-          <div className="mt-5 lg:mt-[80px]">
-            <p className="text-[18px] text-center font-medium leading-[26px]">
-              Lets Review your current circumstances
+          <div className="mt-5 lg:mt-[70px]">
+            <p className="text-[18px] text-center font-medium leading-[26px] mb-[40px]">
+              {`Let's Review your current circumstances`}
             </p>
-            <div className="flex justify-between items-center gap-2">
+            <div className="flex justify-between items-center gap-2 mb-3">
               <p className="text-[16px] font-medium leading-[26px]">
                 Total debt level
               </p>
@@ -83,10 +82,10 @@ const StepEleven = () => {
             </div>
           </div>
           <div className="mt-5 lg:mt-[80px]">
-            <p className="text-[18px] text-center font-medium leading-[26px]">
-              Lets Review your CreditUP legal arrangement
+            <p className="text-[18px] text-center font-medium leading-[26px] mb-[40px]">
+              {` Let's Review your CreditUP legal arrangement`}
             </p>
-            <div className="flex justify-between items-center gap-2">
+            <div className="flex justify-between items-center gap-2 mb-3">
               <p className="text-[16px] font-medium leading-[26px]">
                 New Creditor repayment
               </p>
