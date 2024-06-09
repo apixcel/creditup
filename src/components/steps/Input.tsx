@@ -6,13 +6,25 @@ interface Props {
   id?: string;
   placeholder?: string;
   title: string;
+  isCenter?: boolean;
 }
-const Input: React.FC<Props> = ({ type, name, id, placeholder, title }) => {
+const Input: React.FC<Props> = ({
+  type,
+  name,
+  id,
+  placeholder,
+  title,
+  isCenter,
+}) => {
   return (
-    <div className="flex flex-col gap-[8px] justify-start items-start">
+    <div
+      className={`flex flex-col ${
+        isCenter ? "items-center gap-[20px]" : "items-start gap-[8px]"
+      }`}
+    >
       <label
         htmlFor={id || name}
-        className="text-[16px] leading-[26px] font-[500] text-[#071133]"
+        className={`label ${isCenter ? "text-center" : ""}`}
       >
         {title}
       </label>
@@ -23,11 +35,7 @@ const Input: React.FC<Props> = ({ type, name, id, placeholder, title }) => {
         placeholder={placeholder || ""}
         className="inputPrimary"
       />
-      <ErrorMessage
-        name={name}
-        component="div"
-        className="text-red-500 text-sm"
-      />
+      <ErrorMessage name={name} component="div" className="errorMessage" />
     </div>
   );
 };
