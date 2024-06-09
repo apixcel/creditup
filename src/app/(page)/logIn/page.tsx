@@ -3,7 +3,7 @@ export default function Page() {
   return (
     <>
       <section className="relative h-[100vh] flex items-center justify-center">
-        <SignIn/>
+        <SignIn />
       </section>
     </>
   );
