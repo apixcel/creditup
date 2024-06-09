@@ -1,11 +1,13 @@
-const Button = ({ text, className }: { text: string; className?: string }) => {
-  return (
-    <button
-      className={`w-full py-[12px] px-[24px] bg-[#0A5047] text-white rounded-[12px] ${className}`}
-    >
-      {text}
-    </button>
-  );
+const Button = ({
+  text,
+  className,
+  type,
+}: {
+  text: string;
+  className?: string;
+  type?: string;
+}) => {
+  return <button className={`btn ${className}`}>{text}</button>;
 };
 
 export default Button;

@@ -4,17 +4,15 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import StepBody from "../shared/StepBody";
 import Input from "./Input";
-import Button from "./Button";
+import Warning from "../shared/Warning";
 
 const FormSchema = Yup.object().shape({
-  firstName: Yup.string().required("You must enter the firstName"),
-  lastName: Yup.string().required("You must enter the lastName"),
+  dateOfBirth: Yup.string().required("You must enter the DOB"),
 });
 
-const StepThree = () => {
+const StepFour = () => {
   const initialValue = {
-    firstName: "",
-    lastName: "",
+    dateOfBirth: "",
   };
   const handleSubmit = (values: any) => {
     console.log(values);
@@ -28,8 +26,8 @@ const StepThree = () => {
         onSubmit={handleSubmit}
       >
         <Form>
-          <Input title="First Name" name="firstName" id="firstName" />
-          <Input title="Last Name" name="lastName" id="lastName" />
+          <Warning text="You need to be over 18" />
+          <Input title="DD/MM/YYYY" name="dateOfBirth" id="dob" />
           <button type="submit" className="btn mt-10">
             Continue
           </button>
@@ -39,4 +37,4 @@ const StepThree = () => {
   );
 };
 
-export default StepThree;
+export default StepFour;
