@@ -15,8 +15,8 @@ import StepTwo from "@/components/steps/StepTwo";
 import { useAppSelector } from "@/redux/hook";
 
 const Steps = () => {
-  // const { step } = useAppSelector((state) => state.customer);
-  let step = 11
+  const { step } = useAppSelector((state) => state.customer);
+  // let step = 11
 
   return (
     <div className="py-[80px]">
