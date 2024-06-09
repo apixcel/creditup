@@ -1,11 +1,12 @@
+import { CustomerType } from "@/types/CustomerDetailType";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-export type CustomerType = {
-  customerName: string;
-  phone: string;
-  address: string;
-  postCode: string;
-};
+// export type CustomerType = {
+//   customerName: string;
+//   phone: string;
+//   address: string;
+//   postCode: string;
+// };
 
 export type CustomerDetailType = {
   describe: string;
@@ -43,6 +44,7 @@ export type CustomerInfoType = {
   customerDetail: CustomerDetailType;
   customerAddress: CustomerAddressType;
   creditUp: CreditUpType;
+  step: 0
 };
 
 export const CustomerInfo: CustomerInfoType = {
@@ -78,6 +80,7 @@ export const CustomerInfo: CustomerInfoType = {
     outstandingBalance: 0,
     contribute: 0,
   },
+  step: 0
 };
 
 const initialState: CustomerInfoType | null = CustomerInfo;
@@ -87,6 +90,8 @@ const customerSlice = createSlice({
   reducers: {
     setCustomer(state, action: PayloadAction<CustomerType>) {
       state.customer = action.payload;
+      state.step++;
+      
     },
     setCustomerDetailDescribe(
       state,
