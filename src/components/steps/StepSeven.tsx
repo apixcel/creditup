@@ -9,7 +9,9 @@ import { useAppDispatch } from "@/redux/hook";
 import { setCustomerDetailPhone } from "@/redux/features/customer-detail/customerDetailSlice";
 
 const FormSchema = Yup.object().shape({
-  phone: Yup.string().required("You must enter the phone"),
+  phone: Yup.string()
+    .matches(/^(+\d{1,3}[- ]?)?\d{10}$/, "Phone number is not valid")
+    .required("You must enter the phone number"),
 });
 
 const StepSeven = () => {
@@ -19,7 +21,7 @@ const StepSeven = () => {
   const dispatch = useAppDispatch();
   const handleSubmit = (values: any) => {
     console.log(values);
-    dispatch(setCustomerDetailPhone(values))
+    dispatch(setCustomerDetailPhone(values));
   };
 
   return (
@@ -30,8 +32,8 @@ const StepSeven = () => {
         onSubmit={handleSubmit}
       >
         <Form>
-          <Warning text="We will only call you to give you updates to your account, we never paco this to Third Parties" />
-          <Input title="Phone Number" name="phone" id="phone" />
+          <Warning text="We will only call you to give you updates to your account, we never pass this to Third Parties" />
+          <Input title="Phone Number" name="phone" id="phone" type="tel" />
           <button type="submit" className="btn mt-10">
             Continue
           </button>

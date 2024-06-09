@@ -34,10 +34,13 @@ const StepOne = () => {
           {describeItems.map((item, index) => (
             <button
               key={index}
-              onClick={() => {setCurrentItem(item.value); dispatch(setCustomerDetailDescribe({ describe:item?.value}))}}
-              className={`w-full py-[12px] px-[24px] bg-[#0A5047] text-white rounded-[12px] ${
+              onClick={() => {
+                setCurrentItem(item.value);
+                dispatch(setCustomerDetailDescribe({ describe: item?.value }));
+              }}
+              className={`outline hover:outline-slate-800 border-2 hover:border-white w-full py-[12px] px-[24px] bg-[#0A5047] text-white rounded-[12px] ${
                 item.value === currentItem
-                  ? "outline outline-slate-800 border-2 border-whtie"
+                  ? "outline outline-slate-800 border-2 border-white"
                   : ""
               }`}
             >

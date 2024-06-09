@@ -31,7 +31,7 @@ const StepTwelve = () => {
         validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log(values);
-          dispatch(setCustomerDetailPaymentDate({paymentDate: values.date}))
+          dispatch(setCustomerDetailPaymentDate({ paymentDate: values.date }));
         }}
       >
         {({ setFieldValue, values, errors, touched }) => (
@@ -55,7 +55,6 @@ const StepTwelve = () => {
                 component="div"
                 className="errorMessage"
               />
-              {errors.date && touched.date ? <div>{errors.date}</div> : null}
             </div>
             <button type="submit" className="btn mt-10">
               Continue

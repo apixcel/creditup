@@ -8,6 +8,7 @@ import { parse, isDate } from "date-fns";
 import StepBody from "../shared/StepBody";
 import { useAppDispatch } from "@/redux/hook";
 import { setCustomerDetailDateOfBirth } from "@/redux/features/customer-detail/customerDetailSlice";
+import Warning from "../shared/Warning";
 
 const validationSchema = Yup.object().shape({
   date: Yup.date()
@@ -30,11 +31,12 @@ const StepFour = () => {
         validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log(values);
-          dispatch(setCustomerDetailDateOfBirth({dateOfBirth: values.date}))
+          dispatch(setCustomerDetailDateOfBirth({ dateOfBirth: values.date }));
         }}
       >
         {({ setFieldValue, values, errors, touched }) => (
           <Form>
+            <Warning text="You need to be over 18" />
             <div className="flex flex-col gap-[8px] justify-start items-start">
               <label htmlFor="date" className="label">
                 DD/MM/YYYY
@@ -53,7 +55,6 @@ const StepFour = () => {
                 component="div"
                 className="errorMessage"
               />
-              {errors.date && touched.date ? <div>{errors.date}</div> : null}
             </div>
             <button type="submit" className="btn mt-10">
               Continue

@@ -17,7 +17,11 @@ const Input: React.FC<Props> = ({
   isCenter,
 }) => {
   return (
-    <div className="flex flex-col gap-[8px] justify-start items-start">
+    <div
+      className={`flex flex-col ${
+        isCenter ? "items-center gap-[20px]" : "items-start gap-[8px]"
+      }`}
+    >
       <label
         htmlFor={id || name}
         className={`label ${isCenter ? "text-center" : ""}`}
