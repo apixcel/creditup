@@ -103,7 +103,7 @@ const customerSlice = createSlice({
       state.customerDetail.title = action.payload.title;
       state.step++;
     },
-    setCustomerDetailFirstName(
+    setCustomerDetailName(
       state,
       action: PayloadAction<{ firstName: string; lastName: string }>
     ) {
@@ -132,7 +132,7 @@ const customerSlice = createSlice({
 
       state.step++;
     },
-    setCustomerDetailLastName(state, action: PayloadAction<{ phone: string }>) {
+    setCustomerDetailPhone(state, action: PayloadAction<{ phone: string }>) {
       state.customerDetail.phone = action.payload.phone;
       state.step++;
     },
@@ -170,8 +170,8 @@ export const {
   setCustomerDetailDateOfBirth,
   setCustomerDetailEmail,
   setCreditUp,
-  setCustomerDetailFirstName,
-  setCustomerDetailLastName,
+  setCustomerDetailName,
+  setCustomerDetailPhone,
   setCustomerDetailPassword,
   setCustomerDetailPaymentDate,
   setCustomerDetailStatus,

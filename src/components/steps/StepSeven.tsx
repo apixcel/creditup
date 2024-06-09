@@ -4,36 +4,34 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import StepBody from "../shared/StepBody";
 import Input from "./Input";
-import Button from "./Button";
+import Warning from "../shared/Warning";
 import { useAppDispatch } from "@/redux/hook";
-import { setCustomerDetailName } from "@/redux/features/customer-detail/customerDetailSlice";
+import { setCustomerDetailPhone } from "@/redux/features/customer-detail/customerDetailSlice";
 
 const FormSchema = Yup.object().shape({
-  firstName: Yup.string().required("You must enter the firstName"),
-  lastName: Yup.string().required("You must enter the lastName"),
+  phone: Yup.string().required("You must enter the phone"),
 });
 
-const StepThree = () => {
+const StepSeven = () => {
   const initialValue = {
-    firstName: "",
-    lastName: "",
+    phone: "",
   };
   const dispatch = useAppDispatch();
   const handleSubmit = (values: any) => {
     console.log(values);
-    dispatch(setCustomerDetailName(values))
+    dispatch(setCustomerDetailPhone(values))
   };
 
   return (
-    <StepBody title="What's your name?">
+    <StepBody title="What's your mobile number?">
       <Formik
         initialValues={initialValue}
         validationSchema={FormSchema}
         onSubmit={handleSubmit}
       >
         <Form>
-          <Input title="First Name" name="firstName" id="firstName" />
-          <Input title="Last Name" name="lastName" id="lastName" />
+          <Warning text="We will only call you to give you updates to your account, we never paco this to Third Parties" />
+          <Input title="Phone Number" name="phone" id="phone" />
           <button type="submit" className="btn mt-10">
             Continue
           </button>
@@ -43,4 +41,4 @@ const StepThree = () => {
   );
 };
 
-export default StepThree;
+export default StepSeven;

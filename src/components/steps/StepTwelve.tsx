@@ -6,8 +6,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { parse, isDate } from "date-fns";
 import StepBody from "../shared/StepBody";
+import Warning from "../shared/Warning";
 import { useAppDispatch } from "@/redux/hook";
-import { setCustomerDetailDateOfBirth } from "@/redux/features/customer-detail/customerDetailSlice";
+import { setCustomerDetailPaymentDate } from "@/redux/features/customer-detail/customerDetailSlice";
 
 const validationSchema = Yup.object().shape({
   date: Yup.date()
@@ -20,24 +21,25 @@ const validationSchema = Yup.object().shape({
     .typeError("Date must be in the format dd/mm/yyyy"),
 });
 
-const StepFour = () => {
+const StepTwelve = () => {
   const dispatch = useAppDispatch();
 
   return (
-    <StepBody title="What's your date of birth?">
+    <StepBody title="Payment Date">
       <Formik
         initialValues={{ date: "" }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log(values);
-          dispatch(setCustomerDetailDateOfBirth({dateOfBirth: values.date}))
+          dispatch(setCustomerDetailPaymentDate({paymentDate: values.date}))
         }}
       >
         {({ setFieldValue, values, errors, touched }) => (
           <Form>
-            <div className="flex flex-col gap-[8px] justify-start items-start">
+            <Warning text="Please select the best date each month for us to take your payment of £9.99" />
+            <div>
               <label htmlFor="date" className="label">
-                DD/MM/YYYY
+                Payment Date
               </label>
               <DatePicker
                 selected={values.date as any}
@@ -65,4 +67,4 @@ const StepFour = () => {
   );
 };
 
-export default StepFour;
+export default StepTwelve;
