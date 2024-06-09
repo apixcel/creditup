@@ -5,6 +5,14 @@
   .btn {
     @apply w-full py-[12px] px-[24px] bg-[#0A5047] text-white rounded-[12px];
   }
+
+  .label {
+    @apply text-[16px] leading-[26px] font-[500] text-[#071133];
+  }
+
+  .errorMessage {
+    @apply text-red-500 text-sm;
+  }
 }
 
 @tailwind utilities;
@@ -33,6 +41,14 @@ body {
     rgb(var(--background-start-rgb));
   overflow-x: hidden;
   scroll-behavior: smooth;
+}
+
+.react-datepicker-wrapper {
+  width: 100% !important;
+}
+
+.react-datepicker__input-container {
+  width: 100% !important;
 }
 
 ::-webkit-scrollbar {

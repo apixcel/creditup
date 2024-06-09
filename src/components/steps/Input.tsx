@@ -10,10 +10,7 @@ interface Props {
 const Input: React.FC<Props> = ({ type, name, id, placeholder, title }) => {
   return (
     <div className="flex flex-col gap-[8px] justify-start items-start">
-      <label
-        htmlFor={id || name}
-        className="text-[16px] leading-[26px] font-[500] text-[#071133]"
-      >
+      <label htmlFor={id || name} className="label">
         {title}
       </label>
       <Field
@@ -23,11 +20,7 @@ const Input: React.FC<Props> = ({ type, name, id, placeholder, title }) => {
         placeholder={placeholder || ""}
         className="inputPrimary"
       />
-      <ErrorMessage
-        name={name}
-        component="div"
-        className="text-red-500 text-sm"
-      />
+      <ErrorMessage name={name} component="div" className="errorMessage" />
     </div>
   );
 };

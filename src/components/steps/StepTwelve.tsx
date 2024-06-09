@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { parse, isDate } from "date-fns";
 import StepBody from "../shared/StepBody";
+import Warning from "../shared/Warning";
 
 const validationSchema = Yup.object().shape({
   date: Yup.date()
@@ -18,9 +19,9 @@ const validationSchema = Yup.object().shape({
     .typeError("Date must be in the format dd/mm/yyyy"),
 });
 
-const StepFour = () => {
+const StepTwelve = () => {
   return (
-    <StepBody title="What's your date of birth?">
+    <StepBody title="Payment Date">
       <Formik
         initialValues={{ date: "" }}
         validationSchema={validationSchema}
@@ -30,9 +31,10 @@ const StepFour = () => {
       >
         {({ setFieldValue, values, errors, touched }) => (
           <Form>
-            <div className="flex flex-col gap-[8px] justify-start items-start">
+            <Warning text="Please select the best date each month for us to take your payment of £9.99" />
+            <div>
               <label htmlFor="date" className="label">
-                DD/MM/YYYY
+                Payment Date
               </label>
               <DatePicker
                 selected={values.date as any}
@@ -60,4 +62,4 @@ const StepFour = () => {
   );
 };
 
-export default StepFour;
+export default StepTwelve;
