@@ -1,4 +1,5 @@
 "use client";
+import Button from "@/components/steps/Button";
 import Input from "@/components/steps/Input";
 import Card from "@/components/steps/card";
 import { Form, Formik } from "formik";
@@ -34,12 +35,7 @@ const Page = () => {
                 {showPass ? <FiEyeOff /> : <FiEye />}
               </button>
             </div>
-            <button
-              type="submit"
-              className="bg-primary text-white px-5 py-3 mb-5 rounded-md disabled:bg-gray-400"
-            >
-              submit
-            </button>
+            <Button text="SIGN IN" />
           </Form>
         )}
       </Formik>
