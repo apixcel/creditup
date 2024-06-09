@@ -1,10 +1,12 @@
 "use client";
+import Button from "@/components/steps/Button";
 import Input from "@/components/steps/Input";
 import Card from "@/components/steps/card";
 import { setCustomer } from "@/redux/features/customer-detail/customerDetailSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { CustomerType } from "@/types/CustomerDetailType";
 import { Form, Formik } from "formik";
+import { useRouter } from "next/navigation";
 import * as Yup from "yup";
 
 // Define the validation schema using Yup
@@ -23,11 +25,13 @@ const initialValues = {
 };
 
 const Page = () => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
 
   const handleForm = (values: CustomerType) => {
     console.log(values);
     dispatch(setCustomer(values));
+    router.push("/steps");
   };
 
   return (
@@ -71,12 +75,7 @@ const Page = () => {
                 />
               </div>
             </div>
-            <button
-              type="submit"
-              className="bg-primary text-white px-5 py-3 mb-5 rounded-md disabled:bg-gray-400"
-            >
-              Submit
-            </button>
+            <Button text="Submit" />
           </Form>
         )}
       </Formik>
