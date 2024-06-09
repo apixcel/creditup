@@ -20,7 +20,7 @@ const Input: React.FC<Props> = ({ type, name, id, placeholder }) => {
         id={id || name}
         name={name}
         placeholder={placeholder || ""}
-        className="outline-none px-[20px] py-0 h-[50px] rounded-[15px] border-[1px] border-[#e2e8f0] text-black w-full"
+        className="inputPrimary"
       />
       <ErrorMessage
         name={name}

@@ -32,6 +32,11 @@ body {
   display: none;
 }
 
+@layer components {
+  .inputPrimary {
+    @apply outline-none px-[20px] py-0 h-[50px] rounded-[15px] border-[1px] border-[#e2e8f0] text-black w-full;
+  }
+}
 @layer utilities {
   .text-balance {
     text-wrap: balance;
