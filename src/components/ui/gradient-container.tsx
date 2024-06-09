@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 
 const GradientContainer: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
-    <div className="w-full min-h-[100vh] relative overflow-hidden flex justify-center items-center justify-center">
+    <div className="w-full min-h-[100vh] relative overflow-hidden flex  items-center justify-center">
       <Image
         src={"/img/auraFrameL.png"}
         width={958}
