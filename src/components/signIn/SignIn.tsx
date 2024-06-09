@@ -51,7 +51,7 @@ export default function SignIn() {
   );
 }
 
-const LabelInputContainer = ({
+export const LabelInputContainer = ({
   children,
   className,
 }: {

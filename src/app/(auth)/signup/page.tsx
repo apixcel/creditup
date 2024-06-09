@@ -15,7 +15,7 @@ const Page = () => {
   const [showPass, setShowPass] = useState(false);
 
   return (
-    <Card heading="Sign in to your account">
+    <Card heading="Create an account">
       <CheckBox onChange={(e) => console.log(e)} />
       <Formik initialValues={initialValues} onSubmit={(e) => console.log(e)}>
         {({ errors, touched }) => (
@@ -42,7 +42,7 @@ const Page = () => {
 
             <RememberMe onClick={() => ""} />
 
-            <Button text="SIGN IN" />
+            <Button text="SIGN UP" />
           </Form>
         )}
       </Formik>
