@@ -5,15 +5,16 @@ interface Props {
   name: string;
   id?: string;
   placeholder?: string;
+  label: string;
 }
-const Input: React.FC<Props> = ({ type, name, id, placeholder }) => {
+const Input: React.FC<Props> = ({ type, name, id, placeholder, label }) => {
   return (
     <div className="flex flex-col gap-[8px] justify-start items-start">
       <label
         htmlFor={id || name}
         className="text-[16px] leading-[26px] font-[500] text-[#071133]"
       >
-        Your name
+        {label}
       </label>
       <Field
         type={type || "text"}
