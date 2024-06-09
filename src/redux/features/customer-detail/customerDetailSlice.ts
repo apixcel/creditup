@@ -36,7 +36,7 @@ export type CreditUpType = {
   lender: string;
   outstandingBalance: number;
   contribute: number;
-  [key: string]: any;
+  anotherLander: number
 };
 
 export type CustomerInfoType = {
@@ -79,6 +79,7 @@ export const CustomerInfo: CustomerInfoType = {
     lender: "",
     outstandingBalance: 0,
     contribute: 0,
+    anotherLander: 0
   },
   step: 1,
 };
