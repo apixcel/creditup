@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import StepBody from "../shared/StepBody";
+import { useAppDispatch } from "@/redux/hook";
+import { setCustomerDetailStatus } from "@/redux/features/customer-detail/customerDetailSlice";
 
 const StepNine = () => {
   const [currentItem, setCurrentItem] = useState<string>("");
+  const dispatch = useAppDispatch();
   const status = [
     {
       value: "Home owner with mortgage",
@@ -26,7 +29,7 @@ const StepNine = () => {
         {status.map((item, index) => (
           <button
             key={index}
-            onClick={() => setCurrentItem(item.value)}
+            onClick={() => {setCurrentItem(item.value); dispatch(setCustomerDetailStatus({status: item?.value}))}}
             className={`w-full py-[12px] px-[24px] bg-[#0A5047] text-white rounded-[12px] ${
               item.value === currentItem
                 ? "outline outline-slate-800 border-2 border-whtie"

@@ -1,3 +1,5 @@
+"use client";
+
 import StepEight from "@/components/steps/StepEight";
 import StepEleven from "@/components/steps/StepEleven";
 import StepFive from "@/components/steps/StepFive";
@@ -17,18 +19,18 @@ const Steps = () => {
 
   return (
     <div className="py-[80px]">
-      <StepOne />
-      <StepTwo />
-      <StepThree />
-      <StepFour />
-      <StepFive />
-      <StepSix />
-      <StepSeven />
-      <StepEight />
-      <StepNine />
-      <StepTen />
-      <StepEleven />
-      <StepTwelve />
+      {step === 1 && <StepOne />}
+      {step === 2 && <StepTwo />}
+      {step === 3 && <StepThree />}
+      {step === 4 && <StepFour />}
+      {step === 5 && <StepFive />}
+      {step === 6 && <StepSix />}
+      {step === 7 && <StepSeven />}
+      {step === 8 && <StepEight />}
+      {step === 9 && <StepNine />}
+      {step === 10 && <StepTen />}
+      {step === 11 && <StepEleven />}
+      {step === 12 && <StepTwelve />}
     </div>
   );
 };

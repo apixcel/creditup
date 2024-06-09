@@ -2,9 +2,13 @@
 
 import { useState } from "react";
 import StepBody from "../shared/StepBody";
+import { useAppDispatch } from "@/redux/hook";
+import { setCustomerDetailDescribe } from "@/redux/features/customer-detail/customerDetailSlice";
 
 const StepOne = () => {
   const [currentItem, setCurrentItem] = useState<string>("");
+  const dispatch = useAppDispatch();
+
   const describeItems = [
     {
       value: "I plan on buying a house",
@@ -30,7 +34,7 @@ const StepOne = () => {
           {describeItems.map((item, index) => (
             <button
               key={index}
-              onClick={() => setCurrentItem(item.value)}
+              onClick={() => {setCurrentItem(item.value); dispatch(setCustomerDetailDescribe({ describe:item?.value}))}}
               className={`w-full py-[12px] px-[24px] bg-[#0A5047] text-white rounded-[12px] ${
                 item.value === currentItem
                   ? "outline outline-slate-800 border-2 border-whtie"

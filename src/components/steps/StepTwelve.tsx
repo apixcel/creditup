@@ -7,6 +7,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import { parse, isDate } from "date-fns";
 import StepBody from "../shared/StepBody";
 import Warning from "../shared/Warning";
+import { useAppDispatch } from "@/redux/hook";
+import { setCustomerDetailPaymentDate } from "@/redux/features/customer-detail/customerDetailSlice";
 
 const validationSchema = Yup.object().shape({
   date: Yup.date()
@@ -20,6 +22,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const StepTwelve = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <StepBody title="Payment Date">
       <Formik
@@ -27,6 +31,7 @@ const StepTwelve = () => {
         validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log(values);
+          dispatch(setCustomerDetailPaymentDate({paymentDate: values.date}))
         }}
       >
         {({ setFieldValue, values, errors, touched }) => (

@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import StepBody from "../shared/StepBody";
 import Input from "./Input";
 import Button from "./Button";
+import { useAppDispatch } from "@/redux/hook";
+import { setCustomerDetailName } from "@/redux/features/customer-detail/customerDetailSlice";
 
 const FormSchema = Yup.object().shape({
   firstName: Yup.string().required("You must enter the firstName"),
@@ -16,8 +18,10 @@ const StepThree = () => {
     firstName: "",
     lastName: "",
   };
+  const dispatch = useAppDispatch();
   const handleSubmit = (values: any) => {
     console.log(values);
+    dispatch(setCustomerDetailName(values))
   };
 
   return (

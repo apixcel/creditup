@@ -6,6 +6,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { parse, isDate } from "date-fns";
 import StepBody from "../shared/StepBody";
+import { useAppDispatch } from "@/redux/hook";
+import { setCustomerDetailDateOfBirth } from "@/redux/features/customer-detail/customerDetailSlice";
 
 const validationSchema = Yup.object().shape({
   date: Yup.date()
@@ -19,6 +21,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const StepFour = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <StepBody title="What's your date of birth?">
       <Formik
@@ -26,6 +30,7 @@ const StepFour = () => {
         validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log(values);
+          dispatch(setCustomerDetailDateOfBirth({dateOfBirth: values.date}))
         }}
       >
         {({ setFieldValue, values, errors, touched }) => (
