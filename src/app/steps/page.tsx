@@ -9,14 +9,14 @@ import StepOne from "@/components/steps/StepOne";
 import StepSeven from "@/components/steps/StepSeven";
 import StepSix from "@/components/steps/StepSix";
 import StepTen from "@/components/steps/StepTen";
+import StepThirteen from "@/components/steps/StepThirteen";
 import StepThree from "@/components/steps/StepThree";
 import StepTwelve from "@/components/steps/StepTwelve";
 import StepTwo from "@/components/steps/StepTwo";
-import { useAppSelector } from "@/redux/hook";
 
 const Steps = () => {
   // const { step } = useAppSelector((state) => state.customer);
-  let step = 11
+  let step = 13;
 
   return (
     <div className="py-[80px]">
@@ -32,6 +32,7 @@ const Steps = () => {
       {step === 10 && <StepTen />}
       {step === 11 && <StepEleven />}
       {step === 12 && <StepTwelve />}
+      {step === 13 && <StepThirteen />}
     </div>
   );
 };

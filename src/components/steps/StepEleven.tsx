@@ -6,14 +6,15 @@ import StepBody from "../shared/StepBody";
 import Input from "./Input";
 import { useAppDispatch } from "@/redux/hook";
 import { setCreditUp } from "@/redux/features/customer-detail/customerDetailSlice";
+import { AnyARecord } from "dns";
 
 const FormSchema = Yup.object().shape({
   lender: Yup.string().required("You must enter the lender 1"),
   outstandingBalance: Yup.string().required(
     "You must enter the outStandingBalance"
   ),
-  contribute: Yup.string().required("You must enter the contribute"),
-  anotherLander: Yup.string().required("You must enter the anotherLander"),
+  contribute: Yup.string().required("You must enter the contribution"),
+  anotherLender: Yup.string().required("You must enter another lender"),
 });
 
 const StepEleven = () => {
@@ -25,13 +26,14 @@ const StepEleven = () => {
     contribute: 0,
     anotherLander: 0,
   };
+
   const handleSubmit = (values: any) => {
     console.log("lander",values);
     dispatch(setCreditUp(values));
   };
 
   return (
-    <StepBody title="Which lenders do you owe money too? If the account is with a debt collector, who is it?">
+    <StepBody title="Which lenders do you owe money to? If the account is with a debt collector, who is it?">
       <Formik
         initialValues={initialValue}
         validationSchema={FormSchema}
@@ -57,10 +59,50 @@ const StepEleven = () => {
             name="anotherLander"
             id="anotherLander"
           />
-          <p className="text-center text-[16px] leading-[26px] font-light italic">
-            After the customer has filled out all their debt information a
-            summary should be shown such as;
+          <p className="text-center text-[16px] leading-[26px] font-light italic max-w-[586px] mx-auto">
+            After the customer has filled out all their debt information, a
+            summary should be shown such as:
           </p>
+          <div className="mt-5 lg:mt-[80px]">
+            <p className="text-[18px] text-center font-medium leading-[26px]">
+              Lets Review your current circumstances
+            </p>
+            <div className="flex justify-between items-center gap-2">
+              <p className="text-[16px] font-medium leading-[26px]">
+                Total debt level
+              </p>
+              <p className="text-[16px] font-medium leading-[26px]">
+                Current creditor repayments
+              </p>
+              <p className="text-[16px] font-medium leading-[26px]">Total</p>
+            </div>
+            <div className="flex justify-between items-center gap-1 bg-[#C6D4E0] py-[12px] px-[24px] rounded-[12px] text-[16px] font-medium leading-[26px] mb-[32px]">
+              <p className="text-[16px] font-medium leading-[26px]">******</p>
+              <p className="text-[16px] font-medium leading-[26px]">******</p>
+              <p className="text-[16px] font-medium leading-[26px]">******</p>
+            </div>
+          </div>
+          <div className="mt-5 lg:mt-[80px]">
+            <p className="text-[18px] text-center font-medium leading-[26px]">
+              Lets Review your CreditUP legal arrangement
+            </p>
+            <div className="flex justify-between items-center gap-2">
+              <p className="text-[16px] font-medium leading-[26px]">
+                New Creditor repayment
+              </p>
+              <p className="text-[16px] font-medium leading-[26px]">
+                Monthly Savings
+              </p>
+              <p className="text-[16px] font-medium leading-[26px]">
+                Yearly Savings
+              </p>
+            </div>
+            <div className="flex justify-between items-center gap-1 bg-[#C6D4E0] py-[12px] px-[24px] rounded-[12px] text-[16px] font-medium leading-[26px] mb-[32px]">
+              <p className="text-[16px] font-medium leading-[26px]">******</p>
+              <p className="text-[16px] font-medium leading-[26px]">******</p>
+              <p className="text-[16px] font-medium leading-[26px]">******</p>
+            </div>
+          </div>
           <button type="submit" className="btn mt-10">
             Continue
           </button>

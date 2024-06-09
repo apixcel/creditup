@@ -7,6 +7,7 @@ interface Props {
   placeholder?: string;
   title: string;
   isCenter?: boolean;
+  className?: string;
 }
 const Input: React.FC<Props> = ({
   type,
@@ -15,12 +16,13 @@ const Input: React.FC<Props> = ({
   placeholder,
   title,
   isCenter,
+  className,
 }) => {
   return (
     <div
       className={`flex flex-col ${
         isCenter ? "items-center gap-[20px]" : "items-start gap-[8px]"
-      }`}
+      } ${className || ""}`}
     >
       <label
         htmlFor={id || name}
