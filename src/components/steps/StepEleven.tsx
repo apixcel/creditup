@@ -63,8 +63,45 @@ const StepEleven = () => {
             After the customer has filled out all their debt information, a
             summary should be shown such as:
           </p>
-          <div>
-            <div className=""></div>
+          <div className="mt-5 lg:mt-[80px]">
+            <p className="text-[18px] text-center font-medium leading-[26px]">
+              Lets Review your current circumstances
+            </p>
+            <div className="flex justify-between items-center gap-2">
+              <p className="text-[16px] font-medium leading-[26px]">
+                Total debt level
+              </p>
+              <p className="text-[16px] font-medium leading-[26px]">
+                Current creditor repayments
+              </p>
+              <p className="text-[16px] font-medium leading-[26px]">Total</p>
+            </div>
+            <div className="flex justify-between items-center gap-1 bg-[#C6D4E0] py-[12px] px-[24px] rounded-[12px] text-[16px] font-medium leading-[26px] mb-[32px]">
+              <p className="text-[16px] font-medium leading-[26px]">******</p>
+              <p className="text-[16px] font-medium leading-[26px]">******</p>
+              <p className="text-[16px] font-medium leading-[26px]">******</p>
+            </div>
+          </div>
+          <div className="mt-5 lg:mt-[80px]">
+            <p className="text-[18px] text-center font-medium leading-[26px]">
+              Lets Review your CreditUP legal arrangement
+            </p>
+            <div className="flex justify-between items-center gap-2">
+              <p className="text-[16px] font-medium leading-[26px]">
+                New Creditor repayment
+              </p>
+              <p className="text-[16px] font-medium leading-[26px]">
+                Monthly Savings
+              </p>
+              <p className="text-[16px] font-medium leading-[26px]">
+                Yearly Savings
+              </p>
+            </div>
+            <div className="flex justify-between items-center gap-1 bg-[#C6D4E0] py-[12px] px-[24px] rounded-[12px] text-[16px] font-medium leading-[26px] mb-[32px]">
+              <p className="text-[16px] font-medium leading-[26px]">******</p>
+              <p className="text-[16px] font-medium leading-[26px]">******</p>
+              <p className="text-[16px] font-medium leading-[26px]">******</p>
+            </div>
           </div>
           <button type="submit" className="btn mt-10">
             Continue
