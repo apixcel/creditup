@@ -4,14 +4,15 @@ import Input from "@/components/steps/Input";
 import Card from "@/components/steps/card";
 import CheckBox from "@/components/ui/CheckBox";
 import RememberMe from "@/components/ui/RememberMe";
-import { setCustomerDetailEmailOrNumber } from "@/redux/features/customer-detail/customerDetailSlice";
 import { setUser } from "@/redux/features/user/userSlice";
+import { postData } from "@/utils/fetchData";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
+import Cookies from "js-cookie";
 
 const initialValues = {
   emailOrNumber: "",
@@ -51,26 +52,14 @@ const Page = () => {
       type: userType,
     };
     dispatch(setUser(obj));
-    dispatch(
-      setCustomerDetailEmailOrNumber({ emailOrNumber: e.emailOrNumber })
-    );
 
-    console.log("You have submitted these", obj);
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(obj),
-        }
-      );
-      const result = await res.json();
-      console.log(result);
-
-      // router.push("/customer-detail");
+      const res = await postData("/auth/register", obj);
+      if (!res) {
+        return console.log("Something went wrong!");
+      }
+      Cookies.set("token", res.token);
+      router.push("/customer-detail");
     } catch (error: any) {
       console.log("Error: ", error);
     }

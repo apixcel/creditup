@@ -18,7 +18,6 @@ export type CustomerDetailType = {
   password: string;
   status: string;
   total: string;
-  emailOrNumber: string;
   paymentDate: string;
   [key: string]: any;
 };
@@ -139,12 +138,6 @@ const customerSlice = createSlice({
       state.customerDetail.phone = action.payload.phone;
       state.step++;
     },
-    setCustomerDetailEmailOrNumber(
-      state,
-      action: PayloadAction<{ emailOrNumber: string }>
-    ) {
-      state.customerDetail.emailOrNumber = action.payload.emailOrNumber;
-    },
     setCustomerAddress(state, action: PayloadAction<CustomerAddressType>) {
       state.customerAddress = action.payload;
       state.step++;
@@ -181,7 +174,6 @@ export const {
   setCreditUp,
   setCustomerDetailName,
   setCustomerDetailPhone,
-  setCustomerDetailEmailOrNumber,
   setCustomerDetailPassword,
   setCustomerDetailPaymentDate,
   setCustomerDetailStatus,

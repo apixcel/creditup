@@ -7,7 +7,9 @@ import { useAppDispatch } from "@/redux/hook";
 import { CustomerType } from "@/types/CustomerDetailType";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
+import Cookies from "js-cookie";
 
 // Define the validation schema using Yup
 const FormSchema = Yup.object().shape({
@@ -30,8 +32,17 @@ const Page = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const handleForm = (values: CustomerType) => {
-    console.log(values);
+  const [token, setToken] = useState("");
+  useEffect(() => {
+    const getToken = () => {
+      const tokenValue = Cookies.get("token");
+      setToken(tokenValue as string);
+    };
+
+    getToken();
+  }, []);
+
+  const handleForm = async (values: CustomerType) => {
     dispatch(setCustomer(values));
     router.push("/steps");
   };
