@@ -27,8 +27,15 @@ const StepEleven = () => {
   };
 
   const handleSubmit = (values: any) => {
-    console.log("lender", values);
-    dispatch(setCreditUp(values));
+    const { outstandingBalance, contribute, ...rest } = values;
+
+    const obj = {
+      outstandingBalance: Number(outstandingBalance),
+      contribute: Number(contribute),
+      ...rest,
+    };
+
+    dispatch(setCreditUp(obj));
   };
 
   return (
@@ -45,12 +52,14 @@ const StepEleven = () => {
             title="What is your outstanding balance?"
             name="outstandingBalance"
             id="outstandingBalance"
+            type="number"
           />
           <Input
             isCenter={true}
             title="How much do you contribute towards (lender 1)?"
             name="contribute"
             id="contribute"
+            type="number"
           />
           <Input
             isCenter={true}

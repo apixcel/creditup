@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 const CheckBox = ({
   onChange,
 }: {
-  onChange: (value: "customer" | "guest") => void;
+  onChange: (value: "customer" | "agent") => void;
 }) => {
-  const [selected, setSelected] = useState<"customer" | "guest">("customer");
+  const [selected, setSelected] = useState<"customer" | "agent">("customer");
   useEffect(() => {
     if (onChange) {
       onChange(selected);
@@ -26,11 +26,11 @@ const CheckBox = ({
       </div>
       <div
         className="flex justify-center items-center gap-[10px] cursor-pointer"
-        onClick={() => setSelected("guest")}
+        onClick={() => setSelected("agent")}
       >
-        {selected == "guest" ? <SelectedIcon /> : <SquareBox />}
+        {selected == "agent" ? <SelectedIcon /> : <SquareBox />}
         <p className="text-[16px] text-[#071133] leading-[28.8px]">
-          As a guest
+          As a agent
         </p>
       </div>
     </div>

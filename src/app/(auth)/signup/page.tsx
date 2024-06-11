@@ -11,8 +11,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useDispatch } from "react-redux";
+import { toast } from "sonner";
 import * as Yup from "yup";
-import Cookies from "js-cookie";
 
 const initialValues = {
   emailOrNumber: "",
@@ -41,7 +41,7 @@ const validationSchema = Yup.object().shape({
 
 const Page = () => {
   const [showPass, setShowPass] = useState(false);
-  const [userType, setUserType] = useState<"customer" | "guest">("customer");
+  const [userType, setUserType] = useState<"customer" | "agent">("customer");
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -51,14 +51,23 @@ const Page = () => {
       password: e.password,
       type: userType,
     };
-    dispatch(setUser(obj));
+    console.log(obj);
 
     try {
-      const res = await postData("/auth/register", obj);
+      const res = await postData("/auth/isexist", {
+        emailOrNumber: e.emailOrNumber,
+      });
       if (!res) {
         return console.log("Something went wrong!");
       }
-      Cookies.set("token", res.token);
+
+      // const response = await res.json();
+      if (!res.success || res.duplicate) {
+        return toast.error(res.message);
+      }
+      dispatch(setUser(obj));
+
+      // Cookies.set("token", res.token);
       router.push("/customer-detail");
     } catch (error: any) {
       console.log("Error: ", error);

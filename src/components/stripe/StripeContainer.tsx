@@ -1,4 +1,6 @@
 "use client";
+import { useAppSelector } from "@/redux/hook";
+import { BASEURL } from "@/utils/fetchData";
 import {
   CardCvcElement,
   CardExpiryElement,
@@ -6,19 +8,27 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Toaster, toast } from "sonner";
 import Button from "../steps/Button";
 
 const StripeContainer = () => {
   const stripe = useStripe();
   const elements = useElements();
-  const BASEURL = process.env.NEXT_PUBLIC_API_URL;
   const [error, setError] = useState<string | null>("");
   const [loading, setLoading] = useState(false);
+  const { creditUp, customer, customerAddress, customerDetail } =
+    useAppSelector((state) => state.customer);
+  const user = useAppSelector((state) => state.user);
+  const router = useRouter();
 
   const handlePayment = async (event: React.FormEvent) => {
     event.preventDefault();
-
+    if (loading) {
+      return;
+    }
     if (!stripe || !elements) {
       setError("Stripe.js has not loaded yet. Please try again later.");
       return;
@@ -61,20 +71,61 @@ const StripeContainer = () => {
         },
       });
 
+      const errMessage = result.error?.message || "";
+      const displayErr = [
+        "Your card number is incomplete.",
+        "Your card's expiration date is incomplete.",
+        "Your card's security code is incomplete.",
+      ];
+
+      if (displayErr.includes(errMessage)) {
+        return setError(`Payment failed: ${errMessage}`);
+      }
       if (result.error) {
-        setError(`Payment failed: ${result.error.message}`);
+        toast.error("Something went wrong, try again letter");
+        console.log(result.error);
       } else if (result.paymentIntent.status === "succeeded") {
-        setError(null);
-        console.log("Payment successful!");
-        // Handle post-payment success actions here
+        const object = {
+          ...user,
+          ...creditUp,
+          ...customer,
+          ...customerAddress,
+          ...customerDetail,
+        };
+
+        const confirm = await fetch(`${BASEURL}/payment/confirm`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(object),
+        });
+
+        if (!confirm.ok) {
+          return toast.error(
+            "Something went wrong while creating your account"
+          );
+        }
+
+        const resData = await confirm.json();
+        Cookies.set("token", resData.token);
+        toast.success("Payment successfull");
+        router.push("/");
       }
     } catch (error: any) {
-      setError(`Error: ${error.message || ""}`);
+      toast.error("Something went wrong while proccessing this payment");
+      // setError(`Error: ${error.message || ""}`);
     } finally {
       setLoading(false);
     }
   };
 
+  const loader = (
+    <span className="flex items-center justify-center gap-[5px]">
+      Payment Proccessing
+      <span className="rounded-md h-[25px] w-[25px] border-4 border-t-4 border-blue-500 animate-spin" />
+    </span>
+  );
   return (
     <form onSubmit={handlePayment}>
       <div className="flex flex-col gap-[8px] w-full">
@@ -117,9 +168,10 @@ const StripeContainer = () => {
       <Button
         className="w-full mt-[40px]"
         type="submit"
-        text="Pay by card"
+        text={loading ? loader : "Pay by card"}
         disabled={loading}
       />
+      <Toaster richColors={true} position="top-center" />
     </form>
   );
 };

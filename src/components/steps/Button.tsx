@@ -1,10 +1,12 @@
+import { ReactNode } from "react";
+
 const Button = ({
   text,
   className,
   type,
   disabled,
 }: {
-  text: string;
+  text: string | ReactNode;
   className?: string;
   type?: "submit" | "reset" | "button";
   disabled?: boolean;
