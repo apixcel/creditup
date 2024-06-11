@@ -4,6 +4,7 @@ import Input from "@/components/steps/Input";
 import Card from "@/components/steps/card";
 import CheckBox from "@/components/ui/CheckBox";
 import RememberMe from "@/components/ui/RememberMe";
+import { setCustomerDetailEmailOrNumber } from "@/redux/features/customer-detail/customerDetailSlice";
 import { setUser } from "@/redux/features/user/userSlice";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
@@ -16,32 +17,63 @@ const initialValues = {
   emailOrNumber: "",
   password: "",
 };
-
 type FormValue = typeof initialValues;
 
-const Page = () => {
-  const validationSchema = Yup.object().shape({
-    emailOrNumber: Yup.string().required("You must enter you email or number"),
-    password: Yup.string()
-      .min(8, "Password must be at least 8 characters")
-      .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-      .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-      .required("Password is required"),
-  });
+const validationSchema = Yup.object().shape({
+  emailOrNumber: Yup.string()
+    .required("You must enter your email or number")
+    .test(
+      "is-email-or-phone",
+      "You must enter a valid email or a number between 10 to 14 digits",
+      (value) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^\d{10,14}$/;
+        return emailRegex.test(value) || phoneRegex.test(value);
+      }
+    ),
+  password: Yup.string()
+    .min(8, "Password must be at least 8 characters")
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+    .required("Password is required"),
+});
 
+const Page = () => {
   const [showPass, setShowPass] = useState(false);
   const [userType, setUserType] = useState<"customer" | "guest">("customer");
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const handleSubmit = (e: FormValue) => {
+  const handleSubmit = async (e: FormValue) => {
     const obj = {
       emailOrNumber: e.emailOrNumber,
       password: e.password,
       type: userType,
     };
     dispatch(setUser(obj));
-    router.push("/customer-detail");
+    dispatch(
+      setCustomerDetailEmailOrNumber({ emailOrNumber: e.emailOrNumber })
+    );
+
+    console.log("You have submitted these", obj);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(obj),
+        }
+      );
+      const result = await res.json();
+      console.log(result);
+
+      // router.push("/customer-detail");
+    } catch (error: any) {
+      console.log("Error: ", error);
+    }
   };
 
   return (

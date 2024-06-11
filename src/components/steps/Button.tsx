@@ -2,13 +2,17 @@ const Button = ({
   text,
   className,
   type,
+  disabled,
 }: {
   text: string;
   className?: string;
-  type?: string;
+  type?: "submit" | "reset" | "button";
+  disabled?: boolean;
 }) => {
   return (
     <button
+      disabled={disabled}
+      type={type}
       className={` relative inline-flex overflow-hidden rounded-full p-[1px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 ${
         className || ""
       }`}
