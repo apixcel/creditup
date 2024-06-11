@@ -1,3 +1,4 @@
+"use client";
 // import { isDate, parse } from "date-fns";
 // import { Form, Formik } from "formik";
 // import DatePicker from "react-datepicker";
@@ -16,6 +17,8 @@
 //   cvv: Yup.string().required("Please enter your CVV number"),
 // });
 
+import StepBody from "../shared/StepBody";
+import Warning from "../shared/Warning";
 import StripeWrapper from "../stripe/StripeWrapper";
 
 // const StepThirteen = () => {
@@ -74,9 +77,13 @@ import StripeWrapper from "../stripe/StripeWrapper";
 
 const StepThirteen = () => {
   return (
-    <div>
+    <StepBody title="Card details">
+      <Warning
+        text="This card will be used to make your monthly payments. We take security very seriously, your details will remain secure."
+        className="!mb-[20px]"
+      />
       <StripeWrapper />
-    </div>
+    </StepBody>
   );
 };
 
