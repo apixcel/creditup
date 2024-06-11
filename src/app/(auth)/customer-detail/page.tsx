@@ -5,7 +5,6 @@ import Card from "@/components/steps/card";
 import { setCustomer } from "@/redux/features/customer-detail/customerDetailSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { CustomerType } from "@/types/CustomerDetailType";
-import { updateData } from "@/utils/fetchData";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -45,15 +44,7 @@ const Page = () => {
 
   const handleForm = async (values: CustomerType) => {
     dispatch(setCustomer(values));
-
-    try {
-      const res = await updateData("/customer/update", values, token);
-
-      console.log("Response: ", res);
-      router.push("/steps");
-    } catch (error) {
-      console.log(error);
-    }
+    router.push("/steps");
   };
 
   return (

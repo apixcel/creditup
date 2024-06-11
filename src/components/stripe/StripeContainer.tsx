@@ -12,8 +12,6 @@ const StripeContainer = () => {
     if (!stripe || !elements) {
       return;
     }
-
-    console.log("Kichu ekta asche");
   };
 
   return (
