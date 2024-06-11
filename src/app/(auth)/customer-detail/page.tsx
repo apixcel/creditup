@@ -5,9 +5,12 @@ import Card from "@/components/steps/card";
 import { setCustomer } from "@/redux/features/customer-detail/customerDetailSlice";
 import { useAppDispatch } from "@/redux/hook";
 import { CustomerType } from "@/types/CustomerDetailType";
+import { updateData } from "@/utils/fetchData";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import * as Yup from "yup";
+import Cookies from "js-cookie";
 
 // Define the validation schema using Yup
 const FormSchema = Yup.object().shape({
@@ -30,10 +33,27 @@ const Page = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const handleForm = (values: CustomerType) => {
-    console.log(values);
+  const [token, setToken] = useState("");
+  useEffect(() => {
+    const getToken = () => {
+      const tokenValue = Cookies.get("token");
+      setToken(tokenValue as string);
+    };
+
+    getToken();
+  }, []);
+
+  const handleForm = async (values: CustomerType) => {
     dispatch(setCustomer(values));
-    router.push("/steps");
+
+    try {
+      const res = await updateData("/customer/update", values, token);
+
+      console.log("Response: ", res);
+      router.push("/steps");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
