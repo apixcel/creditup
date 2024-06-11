@@ -20,7 +20,7 @@ const userSlice = createSlice({
 
       state.emailOrNumber = action.payload.emailOrNumber;
       state.password = action.payload.password;
-      state.userType = action.payload.type;
+      state.userType = action.payload.userType;
     },
   },
 });

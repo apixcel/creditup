@@ -6,6 +6,7 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import StepBody from "../shared/StepBody";
 import Input from "./Input";
+import Button from "./Button";
 
 const FormSchema = Yup.object().shape({
   lender: Yup.string().required("You must enter the lender 1"),
@@ -111,9 +112,7 @@ const StepEleven = () => {
               <p className="text-[16px] font-medium leading-[26px]">******</p>
             </div>
           </div>
-          <button type="submit" className="btn mt-10">
-            Continue
-          </button>
+          <Button text=" Continue" type="submit" className="mt-10 w-full" />
         </Form>
       </Formik>
     </StepBody>

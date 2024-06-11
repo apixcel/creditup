@@ -1,14 +1,15 @@
 "use client";
 
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { setCustomerDetailDateOfBirth } from "@/redux/features/customer-detail/customerDetailSlice";
+import { useAppDispatch } from "@/redux/hook";
+import { isDate, parse } from "date-fns";
+import { ErrorMessage, Form, Formik } from "formik";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { parse, isDate } from "date-fns";
+import * as Yup from "yup";
 import StepBody from "../shared/StepBody";
-import { useAppDispatch } from "@/redux/hook";
-import { setCustomerDetailDateOfBirth } from "@/redux/features/customer-detail/customerDetailSlice";
 import Warning from "../shared/Warning";
+import Button from "./Button";
 
 const validationSchema = Yup.object().shape({
   date: Yup.date()
@@ -56,9 +57,7 @@ const StepFour = () => {
                 className="errorMessage"
               />
             </div>
-            <button type="submit" className="btn mt-10">
-              Continue
-            </button>
+            <Button text=" Continue" type="submit" className="mt-10 w-full" />
           </Form>
         )}
       </Formik>

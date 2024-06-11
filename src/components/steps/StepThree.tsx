@@ -34,7 +34,7 @@ const StepThree = () => {
         <Form className="flex flex-col gap-[20px]">
           <Input title="First Name" name="firstName" id="firstName" />
           <Input title="Last Name" name="lastName" id="lastName" />
-          <Button text="Cotinue" className="mt-10" />
+          <Button text="Cotinue" className="mt-10 w-full" />
         </Form>
       </Formik>
     </StepBody>

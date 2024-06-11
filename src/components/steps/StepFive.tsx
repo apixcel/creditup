@@ -33,7 +33,7 @@ const StepFive = () => {
         <Form>
           <Warning text="This will also be your username" />
           <Input title="Email address" name="email" id="email" />
-          <Button type="submit" text="Continue" className="mt-[10px]" />
+          <Button text=" Continue" type="submit" className="mt-10 w-full" />
         </Form>
       </Formik>
     </StepBody>

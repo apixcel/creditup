@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import RedNote from "../shared/RedNote";
 import StepBody from "../shared/StepBody";
 import Warning from "../shared/Warning";
+import Button from "./Button";
 import Input from "./Input";
 
 const FormSchema = Yup.object().shape({
@@ -77,9 +78,8 @@ const StepEight = () => {
             <Input title="City" name="city" id="city" />
             <Input title="Country" name="country" id="country" />
           </div>
-          <button type="submit" className="btn mt-10">
-            Continue
-          </button>
+          <Button text=" Continue" type="submit" className="mt-10 w-full" />
+
         </Form>
       </Formik>
     </StepBody>

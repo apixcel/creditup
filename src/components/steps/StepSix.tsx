@@ -1,12 +1,13 @@
 "use client";
 
+import { setCustomerDetailPassword } from "@/redux/features/customer-detail/customerDetailSlice";
+import { useAppDispatch } from "@/redux/hook";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import StepBody from "../shared/StepBody";
-import Input from "./Input";
 import Warning from "../shared/Warning";
-import { useAppDispatch } from "@/redux/hook";
-import { setCustomerDetailPassword } from "@/redux/features/customer-detail/customerDetailSlice";
+import Button from "./Button";
+import Input from "./Input";
 
 const FormSchema = Yup.object().shape({
   password: Yup.string()
@@ -27,7 +28,7 @@ const StepSix = () => {
   const dispatch = useAppDispatch();
   const handleSubmit = (values: any) => {
     console.log(values);
-    dispatch(setCustomerDetailPassword({password: values?.password}))
+    dispatch(setCustomerDetailPassword({ password: values?.password }));
   };
 
   return (
@@ -51,9 +52,7 @@ const StepSix = () => {
             name="confirmPassword"
             id="cPassword"
           />
-          <button type="submit" className="btn mt-10">
-            Continue
-          </button>
+          <Button text=" Continue" type="submit" className="mt-10 w-full" />
         </Form>
       </Formik>
     </StepBody>

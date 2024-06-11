@@ -52,7 +52,7 @@ export const CustomerInfo: CustomerInfoType = {
     customerName: "",
     phone: "",
     address: "",
-    postCode: "",
+    postCode: 0,
   },
   customerDetail: {
     describe: "",
