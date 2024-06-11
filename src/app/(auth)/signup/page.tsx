@@ -49,7 +49,7 @@ const Page = () => {
     const obj = {
       emailOrNumber: e.emailOrNumber,
       password: e.password,
-      type: userType,
+      userType: userType,
     };
     console.log(obj);
 
