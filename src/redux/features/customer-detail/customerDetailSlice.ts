@@ -7,6 +7,14 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 //   address: string;
 //   postCode: string;
 // };
+export interface Circumstances {
+  totalDebtLevel: number;
+  curCreditorRepayment: number;
+  totalLender: number;
+  newCreditorRepayment: number;
+  monthlySaving: number;
+  yearlySavings: number;
+}
 
 export type CustomerDetailType = {
   describe: string;
@@ -45,6 +53,7 @@ export type CustomerInfoType = {
   customerAddress: CustomerAddressType;
   creditUp: CreditUpType[];
   step: number;
+  circumstances: Circumstances;
 };
 
 export const CustomerInfo: CustomerInfoType = {
@@ -76,6 +85,16 @@ export const CustomerInfo: CustomerInfoType = {
     country: "",
   },
   creditUp: [],
+  circumstances: {
+    totalDebtLevel: 0,
+    totalLender: 0,
+    curCreditorRepayment: 0,
+    newCreditorRepayment: 0,
+
+    monthlySaving: 0,
+    yearlySavings: 0,
+  },
+
   step: 1,
 };
 
@@ -158,6 +177,10 @@ const customerSlice = createSlice({
       state.customerDetail.paymentDate = action.payload.paymentDate;
       state.step++;
     },
+    setCircumstances(state, action: PayloadAction<Circumstances>) {
+      state.circumstances = action.payload;
+      state.step++;
+    },
   },
 });
 
@@ -176,5 +199,6 @@ export const {
   setCustomerDetailStatus,
   setCustomerDetailTotal,
   resetStep,
+  setCircumstances,
 } = customerSlice.actions;
 export default customerSlice.reducer;
