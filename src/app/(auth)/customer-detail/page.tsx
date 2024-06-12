@@ -3,13 +3,13 @@ import Button from "@/components/steps/Button";
 import Input from "@/components/steps/Input";
 import Card from "@/components/steps/card";
 import { setCustomer } from "@/redux/features/customer-detail/customerDetailSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { CustomerType } from "@/types/CustomerDetailType";
 import { Form, Formik } from "formik";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import * as Yup from "yup";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { useEffect, useLayoutEffect, useState } from "react";
+import * as Yup from "yup";
 
 // Define the validation schema using Yup
 const FormSchema = Yup.object().shape({
@@ -18,7 +18,7 @@ const FormSchema = Yup.object().shape({
     .matches(/^\+?\d{10,14}$/, "Phone number is not valid")
     .required("Mobile number is required"),
   address: Yup.string().required("Address is required"),
-  postCode: Yup.string().required("Post code is required"),
+  postCode: Yup.number().required("Post code is required"),
 });
 
 const initialValues = {
@@ -29,6 +29,7 @@ const initialValues = {
 };
 
 const Page = () => {
+  const user = useAppSelector((state) => state.user);
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -43,16 +44,27 @@ const Page = () => {
   }, []);
 
   const handleForm = async (values: CustomerType) => {
-    dispatch(setCustomer(values));
+    const { postCode, ...rest } = values;
+    const obj = {
+      postCode: Number(postCode),
+      ...rest,
+    };
+    dispatch(setCustomer(obj));
     router.push("/steps");
   };
+
+  useLayoutEffect(() => {
+    if (!user.emailOrNumber || !user.password) {
+      return router.push("/signup");
+    }
+  }, [router, user]);
 
   return (
     <Card heading="Customer Details">
       <Formik
         initialValues={initialValues}
         validationSchema={FormSchema} // Pass the validation schema to Formik
-        onSubmit={(values) => handleForm(values)}
+        onSubmit={(values) => handleForm(values as unknown as CustomerType)}
       >
         {({ errors, touched }) => (
           <Form className="w-full mt-[40px] mx-auto flex flex-col gap-[20px]">
@@ -84,6 +96,7 @@ const Page = () => {
                 <Input
                   name="postCode"
                   title="Post Code"
+                  type="number"
                   placeholder="Type your postal code"
                 />
               </div>

@@ -1,16 +1,17 @@
 "use client";
 
+import { setCustomerAddress } from "@/redux/features/customer-detail/customerDetailSlice";
+import { useAppDispatch } from "@/redux/hook";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
-import StepBody from "../shared/StepBody";
-import Input from "./Input";
-import Warning from "../shared/Warning";
 import RedNote from "../shared/RedNote";
-import { useAppDispatch } from "@/redux/hook";
-import { setCustomerAddress } from "@/redux/features/customer-detail/customerDetailSlice";
+import StepBody from "../shared/StepBody";
+import Warning from "../shared/Warning";
+import Button from "./Button";
+import Input from "./Input";
 
 const FormSchema = Yup.object().shape({
-  postCode: Yup.string().required("Postcode is required"),
+  postCode: Yup.number().required("Postcode is required"),
   buildingNumber: Yup.string().required("Building number is required"),
   streetName: Yup.string().required("Street name is required"),
   city: Yup.string().required("City is required"),
@@ -31,8 +32,14 @@ const StepEight = () => {
   const dispatch = useAppDispatch();
 
   const handleSubmit = (values: any) => {
+    const { postCode, ...rest } = values;
+    const obj = {
+      postCode: Number(postCode),
+      ...rest,
+    };
+
     console.log(values);
-    dispatch(setCustomerAddress(values));
+    dispatch(setCustomerAddress(obj));
   };
 
   return (
@@ -46,7 +53,12 @@ const StepEight = () => {
           <Warning text="Put in your postcode and we'll find your address" />
           <RedNote text="Postcode, Building number, Sub building name or Building name, Street name, Town/city, County is required, Please enter manually" />
           <div className="flex flex-col gap-[20px]">
-            <Input title="Postcode" name="postCode" id="postCode" />
+            <Input
+              title="Postcode"
+              name="postCode"
+              id="postCode"
+              type="number"
+            />
             <Input
               title="Building Number"
               name="buildingNumber"
@@ -57,14 +69,17 @@ const StepEight = () => {
               name="subBuildingName"
               id="subBuildingName"
             />
-            <Input title="Building Name (optional)" name="buildingName" id="buildingName" />
+            <Input
+              title="Building Name (optional)"
+              name="buildingName"
+              id="buildingName"
+            />
             <Input title="Street Name" name="streetName" id="streetName" />
             <Input title="City" name="city" id="city" />
             <Input title="Country" name="country" id="country" />
           </div>
-          <button type="submit" className="btn mt-10">
-            Continue
-          </button>
+          <Button text=" Continue" type="submit" className="mt-10 w-full" />
+
         </Form>
       </Formik>
     </StepBody>

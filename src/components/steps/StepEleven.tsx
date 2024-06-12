@@ -6,6 +6,7 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import StepBody from "../shared/StepBody";
 import Input from "./Input";
+import Button from "./Button";
 
 const FormSchema = Yup.object().shape({
   lender: Yup.string().required("You must enter the lender 1"),
@@ -27,8 +28,15 @@ const StepEleven = () => {
   };
 
   const handleSubmit = (values: any) => {
-    console.log("lender", values);
-    dispatch(setCreditUp(values));
+    const { outstandingBalance, contribute, ...rest } = values;
+
+    const obj = {
+      outstandingBalance: Number(outstandingBalance),
+      contribute: Number(contribute),
+      ...rest,
+    };
+
+    dispatch(setCreditUp(obj));
   };
 
   return (
@@ -45,12 +53,14 @@ const StepEleven = () => {
             title="What is your outstanding balance?"
             name="outstandingBalance"
             id="outstandingBalance"
+            type="number"
           />
           <Input
             isCenter={true}
             title="How much do you contribute towards (lender 1)?"
             name="contribute"
             id="contribute"
+            type="number"
           />
           <Input
             isCenter={true}
@@ -102,9 +112,7 @@ const StepEleven = () => {
               <p className="text-[16px] font-medium leading-[26px]">******</p>
             </div>
           </div>
-          <button type="submit" className="btn mt-10">
-            Continue
-          </button>
+          <Button text=" Continue" type="submit" className="mt-10 w-full" />
         </Form>
       </Formik>
     </StepBody>

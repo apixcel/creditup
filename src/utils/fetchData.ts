@@ -38,3 +38,5 @@ export async function updateData(url: string, body: object, token: string) {
     throw error;
   }
 }
+
+export const BASEURL = process.env.NEXT_PUBLIC_API_URL;

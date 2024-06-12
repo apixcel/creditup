@@ -3,16 +3,24 @@ import { createSlice } from "@reduxjs/toolkit";
 interface IUser {
   emailOrNumber: string;
   password: string;
-  type: "customer" | "guest";
+  userType: "customer" | "agent";
 }
 
-const initialState: IUser = { emailOrNumber: "", password: "", type: "guest" };
+const initialState: IUser = {
+  emailOrNumber: "",
+  password: "",
+  userType: "customer",
+};
 const userSlice = createSlice({
-  name: "step",
+  name: "user",
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state = action.payload;
+      console.log(action.payload);
+
+      state.emailOrNumber = action.payload.emailOrNumber;
+      state.password = action.payload.password;
+      state.userType = action.payload.userType;
     },
   },
 });
