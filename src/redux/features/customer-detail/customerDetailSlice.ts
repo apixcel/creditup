@@ -43,7 +43,7 @@ export type CustomerInfoType = {
   customer: CustomerType;
   customerDetail: CustomerDetailType;
   customerAddress: CustomerAddressType;
-  creditUp: CreditUpType;
+  creditUp: CreditUpType[];
   step: number;
 };
 
@@ -75,12 +75,7 @@ export const CustomerInfo: CustomerInfoType = {
     city: "",
     country: "",
   },
-  creditUp: {
-    lender: "",
-    outstandingBalance: 0,
-    contribute: 0,
-    anotherLander: 0,
-  },
+  creditUp: [],
   step: 1,
 };
 
@@ -152,7 +147,7 @@ const customerSlice = createSlice({
       state.customerDetail.total = Number(action.payload.total);
       state.step++;
     },
-    setCreditUp(state, action: PayloadAction<CreditUpType>) {
+    setCreditUp(state, action: PayloadAction<CreditUpType[]>) {
       state.creditUp = action.payload;
       state.step++;
     },
