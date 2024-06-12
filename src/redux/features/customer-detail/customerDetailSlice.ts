@@ -106,6 +106,7 @@ const customerSlice = createSlice({
       state.step++;
     },
     setCustomerAddress(state, action: PayloadAction<CustomerAddressType>) {
+      console.log(action.payload);
       state.customerAddress = action.payload;
       state.step++;
     },

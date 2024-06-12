@@ -54,17 +54,17 @@ const Page = () => {
     console.log(obj);
 
     try {
-      const res = await postData("/auth/isexist", {
-        emailOrNumber: e.emailOrNumber,
-      });
-      if (!res) {
-        return console.log("Something went wrong!");
-      }
+      // const res = await postData("/auth/isexist", {
+      //   emailOrNumber: e.emailOrNumber,
+      // });
+      // if (!res) {
+      //   return console.log("Something went wrong!");
+      // }
 
-      // const response = await res.json();
-      if (!res.success || res.duplicate) {
-        return toast.error(res.message);
-      }
+      // // const response = await res.json();
+      // if (!res.success || res.duplicate) {
+      //   return toast.error(res.message);
+      // }
       dispatch(setUser(obj));
 
       // Cookies.set("token", res.token);

@@ -11,7 +11,6 @@ import Button from "./Button";
 import Input from "./Input";
 
 const FormSchema = Yup.object().shape({
-  postCode: Yup.number().required("Postcode is required"),
   buildingNumber: Yup.string().required("Building number is required"),
   streetName: Yup.string().required("Street name is required"),
   city: Yup.string().required("City is required"),
@@ -33,7 +32,6 @@ const StepEight = () => {
   const handleSubmit = (values: any) => {
     const obj = values;
 
-    console.log(values);
     dispatch(setCustomerAddress(obj));
   };
 
@@ -67,7 +65,7 @@ const StepEight = () => {
             <Input title="City" name="city" id="city" />
             <Input title="Country" name="country" id="country" />
           </div>
-          <Button text=" Continue" type="submit" className="mt-10 w-full" />
+          <Button text="Continue" type="submit" className="mt-10 w-full" />
         </Form>
       </Formik>
     </StepBody>

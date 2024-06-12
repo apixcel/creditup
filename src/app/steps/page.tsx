@@ -19,9 +19,9 @@ import { useDispatch } from "react-redux";
 
 const Steps = () => {
   const { step } = useAppSelector((state) => state.customer);
+  const user = useAppSelector((state) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
-  const user = useAppSelector((state) => state.user);
 
   useLayoutEffect(() => {
     dispatch(resetStep(undefined));
@@ -36,14 +36,11 @@ const Steps = () => {
       {step === 1 && <StepOne />}
       {step === 2 && <StepTwo />}
       {step === 3 && <StepFour />}
-      {step === 4 && <StepSix />}
-      {step === 5 && <StepSeven />}
-      {step === 6 && <StepEight />}
-      {step === 7 && <StepNine />}
-      {step === 8 && <StepTen />}
-      {step === 9 && <StepEleven />}
-      {step === 10 && <StepTwelve />}
-      {step === 11 && <StepThirteen />}
+      {step === 4 && <StepEight />}
+      {step === 5 && <StepNine />}
+      {step === 6 && <StepEleven />}
+      {step === 7 && <StepTwelve />}
+      {step === 8 && <StepThirteen />}
     </div>
   );
 };
