@@ -14,10 +14,14 @@ const initialValues = {
 const Page = () => {
   const [showPass, setShowPass] = useState(false);
 
+  const handleSubmit = async () => {
+    
+  };
+
   return (
     <Card heading="Sign in to your account">
       <CheckBox onChange={(e) => console.log(e)} />
-      <Formik initialValues={initialValues} onSubmit={(e) => console.log(e)}>
+      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {({ errors, touched }) => (
           <Form className="w-full mx-auto flex flex-col gap-[20px]">
             <Input
