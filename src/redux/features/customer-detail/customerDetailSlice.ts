@@ -7,7 +7,7 @@ export interface Circumstances {
   totalLender: number;
   newCreditorRepayment: number;
   monthlySaving: number;
-  yearlySavings: number;
+  yearlySaving: number;
 }
 
 export type CustomerDetailType = {
@@ -77,7 +77,7 @@ export const CustomerInfo: CustomerInfoType = {
     newCreditorRepayment: 0,
 
     monthlySaving: 0,
-    yearlySavings: 0,
+    yearlySaving: 0,
   },
 
   step: 1,

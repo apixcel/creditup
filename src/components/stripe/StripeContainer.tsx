@@ -19,7 +19,7 @@ const StripeContainer = () => {
   const elements = useElements();
   const [error, setError] = useState<string | null>("");
   const [loading, setLoading] = useState(false);
-  const { creditUp, customer, customerAddress, customerDetail } =
+  const { creditUp, customer, customerAddress, customerDetail, circumstances } =
     useAppSelector((state) => state.customer);
   const user = useAppSelector((state) => state.user);
   const router = useRouter();
@@ -87,10 +87,11 @@ const StripeContainer = () => {
       } else if (result.paymentIntent.status === "succeeded") {
         const object = {
           ...user,
-          ...creditUp,
+          creditUp,
           ...customer,
           ...customerAddress,
           ...customerDetail,
+          ...circumstances,
         };
 
         const confirm = await fetch(`${BASEURL}/payment/confirm`, {

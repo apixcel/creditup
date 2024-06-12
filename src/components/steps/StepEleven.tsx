@@ -46,7 +46,7 @@ const StepEleven = () => {
       curCreditorRepayment: toatlContributeBalance,
       newCreditorRepayment: toatlContributeBalance * 0.5,
       monthlySaving: toatlContributeBalance * 0.5 * 0.5,
-      yearlySavings:toatlContributeBalance * 0.5 * 0.5 *12,
+      yearlySaving:toatlContributeBalance * 0.5 * 0.5 *12,
       totalLender:numberOflenders
     };
 
