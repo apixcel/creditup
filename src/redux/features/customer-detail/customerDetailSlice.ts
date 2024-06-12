@@ -1,12 +1,6 @@
 import { CustomerType } from "@/types/CustomerDetailType";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-// export type CustomerType = {
-//   customerName: string;
-//   phone: string;
-//   address: string;
-//   postCode: string;
-// };
 export interface Circumstances {
   totalDebtLevel: number;
   curCreditorRepayment: number;
@@ -19,11 +13,8 @@ export interface Circumstances {
 export type CustomerDetailType = {
   describe: string;
   title: string;
-  firstName: string;
-  lastName: string;
   dateOfBirth: string;
   email: string;
-  password: string;
   status: string;
   total: number;
   paymentDate: string;
@@ -31,7 +22,6 @@ export type CustomerDetailType = {
 };
 
 export type CustomerAddressType = {
-  postCode: number;
   buildingNumber: String;
   subBuildingName: String;
   buildingName: String;
@@ -44,7 +34,6 @@ export type CreditUpType = {
   lender: string;
   outstandingBalance: number;
   contribute: number;
-  anotherLander: number;
 };
 
 export type CustomerInfoType = {
@@ -66,17 +55,13 @@ export const CustomerInfo: CustomerInfoType = {
   customerDetail: {
     describe: "",
     title: "",
-    firstName: "",
-    lastName: "",
     dateOfBirth: "",
     email: "",
-    password: "",
     status: "",
     total: 0,
     paymentDate: "",
   },
   customerAddress: {
-    postCode: 0,
     buildingNumber: "",
     subBuildingName: "",
     buildingName: "",
@@ -121,16 +106,6 @@ const customerSlice = createSlice({
       state.customerDetail.title = action.payload.title;
       state.step++;
     },
-    setCustomerDetailName(
-      state,
-      action: PayloadAction<{ firstName: string; lastName: string }>
-    ) {
-      state.customerDetail.firstName = action.payload.firstName;
-      state.customerDetail.lastName = action.payload.lastName;
-
-      state.step++;
-    },
-
     setCustomerDetailDateOfBirth(
       state,
       action: PayloadAction<{ dateOfBirth: string }>
@@ -142,19 +117,12 @@ const customerSlice = createSlice({
       state.customerDetail.email = action.payload.email;
       state.step++;
     },
-    setCustomerDetailPassword(
-      state,
-      action: PayloadAction<{ password: string }>
-    ) {
-      state.customerDetail.password = action.payload.password;
-
-      state.step++;
-    },
     setCustomerDetailPhone(state, action: PayloadAction<{ phone: string }>) {
       state.customerDetail.phone = action.payload.phone;
       state.step++;
     },
     setCustomerAddress(state, action: PayloadAction<CustomerAddressType>) {
+      console.log(action.payload);
       state.customerAddress = action.payload;
       state.step++;
     },
@@ -192,13 +160,12 @@ export const {
   setCustomerDetailDateOfBirth,
   setCustomerDetailEmail,
   setCreditUp,
-  setCustomerDetailName,
   setCustomerDetailPhone,
-  setCustomerDetailPassword,
   setCustomerDetailPaymentDate,
   setCustomerDetailStatus,
   setCustomerDetailTotal,
   resetStep,
   setCircumstances,
 } = customerSlice.actions;
+
 export default customerSlice.reducer;

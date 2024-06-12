@@ -11,7 +11,6 @@ import Button from "./Button";
 import Input from "./Input";
 
 const FormSchema = Yup.object().shape({
-  postCode: Yup.number().required("Postcode is required"),
   buildingNumber: Yup.string().required("Building number is required"),
   streetName: Yup.string().required("Street name is required"),
   city: Yup.string().required("City is required"),
@@ -20,7 +19,6 @@ const FormSchema = Yup.object().shape({
 
 const StepEight = () => {
   const initialValue = {
-    postCode: "",
     buildingNumber: "",
     subBuildingName: "",
     buildingName: "",
@@ -32,13 +30,8 @@ const StepEight = () => {
   const dispatch = useAppDispatch();
 
   const handleSubmit = (values: any) => {
-    const { postCode, ...rest } = values;
-    const obj = {
-      postCode: Number(postCode),
-      ...rest,
-    };
+    const obj = values;
 
-    console.log(values);
     dispatch(setCustomerAddress(obj));
   };
 
@@ -53,12 +46,6 @@ const StepEight = () => {
           <Warning text="Put in your postcode and we'll find your address" />
           <RedNote text="Postcode, Building number, Sub building name or Building name, Street name, Town/city, County is required, Please enter manually" />
           <div className="flex flex-col gap-[20px]">
-            <Input
-              title="Postcode"
-              name="postCode"
-              id="postCode"
-              type="number"
-            />
             <Input
               title="Building Number"
               name="buildingNumber"
@@ -78,8 +65,7 @@ const StepEight = () => {
             <Input title="City" name="city" id="city" />
             <Input title="Country" name="country" id="country" />
           </div>
-          <Button text=" Continue" type="submit" className="mt-10 w-full" />
-
+          <Button text="Continue" type="submit" className="mt-10 w-full" />
         </Form>
       </Formik>
     </StepBody>

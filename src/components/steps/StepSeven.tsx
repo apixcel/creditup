@@ -35,7 +35,7 @@ const StepSeven = () => {
         <Form>
           <Warning text="We will only call you to give you updates to your account, we never pass this to Third Parties" />
           <Input title="Phone Number" name="phone" id="phone" type="tel" />
-          <Button text=" Continue" type="submit" className="mt-10 w-full" />
+          <Button text="Continue" type="submit" className="mt-10 w-full" />
         </Form>
       </Formik>
     </StepBody>

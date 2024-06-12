@@ -2,7 +2,7 @@
 
 import { setCustomerDetailDateOfBirth } from "@/redux/features/customer-detail/customerDetailSlice";
 import { useAppDispatch } from "@/redux/hook";
-import { isDate, parse } from "date-fns";
+import { isDate, parse, subYears } from "date-fns";
 import { ErrorMessage, Form, Formik } from "formik";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,7 +19,17 @@ const validationSchema = Yup.object().shape({
       return isDate(parsedDate) ? parsedDate : new Date("");
     })
     .required("Date is required")
-    .typeError("Date must be in the format dd/mm/yyyy"),
+    .typeError("Date must be in the format dd/mm/yyyy")
+    .test(
+      "is-18-years-old",
+      "You must be at least 18 years old",
+      function (value) {
+        if (!value) return false; // If value is not provided, validation fails.
+        const today = new Date();
+        const ageLimit = subYears(today, 18);
+        return value <= ageLimit;
+      }
+    ),
 });
 
 const StepFour = () => {
