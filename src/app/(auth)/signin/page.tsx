@@ -1,4 +1,5 @@
 "use client";
+
 import Button from "@/components/steps/Button";
 import Input from "@/components/steps/Input";
 import Card from "@/components/steps/card";
@@ -7,50 +8,119 @@ import RememberMe from "@/components/ui/RememberMe";
 import { Form, Formik } from "formik";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import * as Yup from "yup";
+import Cookies from "js-cookie";
+import { postData } from "@/utils/fetchData";
+import { useRouter } from "next/navigation";
+
 const initialValues = {
   emailOrNumber: "",
   password: "",
 };
+
+const ValidationSchema = Yup.object().shape({
+  emailOrNumber: Yup.string()
+    .required("You must enter your email or number")
+    .test(
+      "is-email-or-phone",
+      "You must enter a valid email or a number between 10 to 14 digits",
+      (value) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^\d{10,14}$/;
+        return emailRegex.test(value) || phoneRegex.test(value);
+      }
+    ),
+  password: Yup.string()
+    .min(8, "Password must be at least 8 characters")
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+    .required("Password is required"),
+});
+
 const Page = () => {
   const [showPass, setShowPass] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
+  const router = useRouter();
 
-  const handleSubmit = async () => {
-    
+  const handleSubmit = async (values: any) => {
+    try {
+      const res = await postData("/auth/login", values);
+      if (!res.success) {
+        setModalShow(true);
+      } else {
+        Cookies.set("token", res.token);
+        router.push("/");
+      }
+    } catch (error: any) {
+      console.log(error);
+    }
   };
 
   return (
-    <Card heading="Sign in to your account">
-      <CheckBox onChange={(e) => console.log(e)} />
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        {({ errors, touched }) => (
-          <Form className="w-full mx-auto flex flex-col gap-[20px]">
-            <Input
-              name="emailOrNumber"
-              title="Email/Number"
-              placeholder="Type your mail"
-            />
-            <div className="w-full relative">
-              <Input
-                name="password"
-                title="Password"
-                type={showPass ? "text" : "password"}
-                placeholder="Type your Password"
-              />
+    <>
+      {modalShow && (
+        <div className="absolute inset-0 h-screen z-50 w-full bg-black/75 flex justify-center items-center">
+          <div className="max-w-md bg-white rounded-md p-5 shadow-md">
+            <h3 className="text-xl text-slate-900 font-bold mb-3">
+              You don&apos;t have an account!
+            </h3>
+            <p className="text-sm text-slate-500 mb-5">
+              Please create an account now.
+            </p>
+            <div className="grid grid-cols-3 gap-2">
               <button
-                onClick={() => setShowPass(!showPass)}
-                className="text-[#718096] absolute right-[20px] top-[51px]"
+                className="rounded px-3 py-2 col-span-2 bg-violet-600 text-white"
+                onClick={() => router.push("/signup")}
               >
-                {showPass ? <FiEye /> : <FiEyeOff />}
+                Create an account
+              </button>
+              <button
+                className="rounded px-3 py-2 bg-red-500 text-white"
+                onClick={() => setModalShow(false)}
+              >
+                Cancel
               </button>
             </div>
+          </div>
+        </div>
+      )}
+      <Card heading="Sign in to your account">
+        <CheckBox onChange={(e) => console.log(e)} />
+        <Formik
+          initialValues={initialValues}
+          validationSchema={ValidationSchema}
+          onSubmit={handleSubmit}
+        >
+          {({ errors, touched }) => (
+            <Form className="w-full mx-auto flex flex-col gap-[20px]">
+              <Input
+                name="emailOrNumber"
+                title="Email/Number"
+                placeholder="Type your mail"
+              />
+              <div className="w-full relative">
+                <Input
+                  name="password"
+                  title="Password"
+                  type={showPass ? "text" : "password"}
+                  placeholder="Type your Password"
+                />
+                <button
+                  onClick={() => setShowPass(!showPass)}
+                  className="text-[#718096] absolute right-[20px] top-[51px]"
+                >
+                  {showPass ? <FiEye /> : <FiEyeOff />}
+                </button>
+              </div>
 
-            <RememberMe onClick={() => ""} />
+              <RememberMe onClick={() => ""} />
 
-            <Button text="SIGN IN" />
-          </Form>
-        )}
-      </Formik>
-    </Card>
+              <Button text="SIGN IN" />
+            </Form>
+          )}
+        </Formik>
+      </Card>
+    </>
   );
 };
 
