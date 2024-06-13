@@ -5,19 +5,14 @@ import {
   CardCvcElement,
   CardExpiryElement,
   CardNumberElement,
-  Elements,
-  PaymentElement,
-  PaymentRequestButtonElement,
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import { PaymentRequest } from "@stripe/stripe-js";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Toaster, toast } from "sonner";
 import Button from "../steps/Button";
-import { stripePromise } from "./StripeWrapper";
 
 const StripeContainer = () => {
   const stripe = useStripe();
@@ -29,10 +24,6 @@ const StripeContainer = () => {
     useAppSelector((state) => state.customer);
   const user = useAppSelector((state) => state.user);
   const router = useRouter();
-
-
-
-
 
   const handlePayment = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -131,15 +122,12 @@ const StripeContainer = () => {
     }
   };
 
-
   const loader = (
     <span className="flex items-center justify-center gap-[5px]">
       Payment Processing
       <span className="rounded-md h-[25px] w-[25px] border-4 border-t-4 border-blue-500 animate-spin" />
     </span>
   );
-
-
 
   return (
     <form onSubmit={handlePayment}>
