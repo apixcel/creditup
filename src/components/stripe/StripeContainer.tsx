@@ -50,6 +50,7 @@ const StripeContainer = () => {
       // Create Payment Intent on the backend
       const response = await fetch(`${BASEURL}/payment/create/intent`, {
         method: "POST",
+        mode: "no-cors",
         headers: {
           "Content-Type": "application/json",
         },
@@ -97,6 +98,7 @@ const StripeContainer = () => {
 
         const confirm = await fetch(`${BASEURL}/payment/confirm`, {
           method: "POST",
+          mode: 'no-cors',
           headers: {
             "Content-Type": "application/json",
           },
