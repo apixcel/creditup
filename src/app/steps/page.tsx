@@ -42,7 +42,7 @@ const Steps = () => {
       {step === 7 && <StepEleven />}
       {step === 8 && <StepTwelve />}
       {step === 9 && <StepThirteen />}
-      {step === 99 && <StepTest />}
+      {/* {step === 99 && <StepTest />} */}
     </div>
   );
 };
