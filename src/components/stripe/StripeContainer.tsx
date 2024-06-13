@@ -24,48 +24,15 @@ const StripeContainer = () => {
   const elements = useElements();
   const [error, setError] = useState<string | null>("");
   const [loading, setLoading] = useState(false);
-  const [paymentRequest, setPaymentRequest] = useState<PaymentRequest | null>(
-    null
-  );
+
   const { creditUp, customer, customerAddress, customerDetail, circumstances } =
     useAppSelector((state) => state.customer);
   const user = useAppSelector((state) => state.user);
   const router = useRouter();
-  const [clientSecret, setClientSecret] = useState("");
-  useEffect(() => {
-    if (stripe) {
-      const pr = stripe.paymentRequest({
-        country: "US",
-        currency: "usd",
-        total: {
-          label: "Demo total",
-          amount: 1099,
-        },
-        requestPayerName: true,
-        requestPayerEmail: true,
-      });
 
-      // Check the availability of the Payment Request API.
-      pr.canMakePayment().then((result) => {
-        if (result) {
-          setPaymentRequest(pr);
-        }
-      });
-    }
-  }, [stripe]);
 
-  useEffect(() => {
-    // Fetch the client secret from the server
-    fetch(`${BASEURL}/payment/create/intent`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ amount: 9.99 }),
-    })
-      .then((res) => res.json())
-      .then((data) => setClientSecret(data));
-  }, []);
 
-  console.log(paymentRequest);
+
 
   const handlePayment = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -163,7 +130,7 @@ const StripeContainer = () => {
       setLoading(false);
     }
   };
-  console.log(paymentRequest);
+
 
   const loader = (
     <span className="flex items-center justify-center gap-[5px]">
@@ -171,16 +138,8 @@ const StripeContainer = () => {
       <span className="rounded-md h-[25px] w-[25px] border-4 border-t-4 border-blue-500 animate-spin" />
     </span>
   );
-  console.log(clientSecret, "client sec");
 
-  if (paymentRequest && clientSecret) {
-    return (
-      <Elements stripe={stripePromise} options={{ clientSecret }}>
-        <PaymentElement />
-        <PaymentRequestButtonElement options={{ paymentRequest }} />
-      </Elements>
-    );
-  }
+
 
   return (
     <form onSubmit={handlePayment}>

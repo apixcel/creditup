@@ -8,24 +8,27 @@ import StepOne from "@/components/steps/StepOne";
 import StepThirteen from "@/components/steps/StepThirteen";
 import StepTwelve from "@/components/steps/StepTwelve";
 import StepTwo from "@/components/steps/StepTwo";
+import StepTest from "@/components/steps/stepTest";
+import { resetStep } from "@/redux/features/customer-detail/customerDetailSlice";
 import { useAppSelector } from "@/redux/hook";
 import { useRouter } from "next/navigation";
+import { useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 
 const Steps = () => {
-  const { step: chup } = useAppSelector((state) => state.customer);
+  const { step } = useAppSelector((state) => state.customer);
   const user = useAppSelector((state) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
 
-  // useLayoutEffect(() => {
-  //   dispatch(resetStep(undefined));
-  //   if (!user.emailOrNumber || !user.password) {
-  //     return router.push("/signup");
-  //   }
-  // }, [dispatch, router, user]);
+  useLayoutEffect(() => {
+    dispatch(resetStep(undefined));
+    if (!user.emailOrNumber || !user.password) {
+      return router.push("/signup");
+    }
+  }, [dispatch, router, user]);
 
-  let step = 8;
+  // let step = 99;
 
   return (
     <div className="py-[80px]">
@@ -37,6 +40,7 @@ const Steps = () => {
       {step === 6 && <StepEleven />}
       {step === 7 && <StepTwelve />}
       {step === 8 && <StepThirteen />}
+      {step === 99 && <StepTest />}
     </div>
   );
 };

@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { toast } from "sonner";
 import * as Yup from "yup";
 
 const initialValues = {
@@ -52,6 +53,7 @@ const Page = () => {
         setModalShow(true);
       } else {
         Cookies.set("token", res.token);
+        toast.success("Successfully logedin");
         router.push("/");
       }
     } catch (error: any) {
