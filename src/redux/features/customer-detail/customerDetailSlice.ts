@@ -148,6 +148,7 @@ const customerSlice = createSlice({
     setCircumstances(state, action: PayloadAction<Circumstances>) {
       state.circumstances = action.payload;
 
+      
     },
   },
 });
