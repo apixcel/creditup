@@ -13,6 +13,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import * as Yup from "yup";
+import Cookies from "js-cookie";
 
 const initialValues = {
   emailOrNumber: "",
@@ -51,34 +52,37 @@ const Page = () => {
       password: e.password,
       userType: userType,
     };
-    console.log(obj);
 
     try {
       const res = await postData("/auth/isexist", {
         emailOrNumber: e.emailOrNumber,
       });
+
       if (!res) {
         return console.log("Something went wrong!");
       }
 
-      // const response = await res.json();
       if (!res.success || res.duplicate) {
         return toast.error(res.message);
       }
+
       dispatch(setUser(obj));
 
-      // Cookies.set("token", res.token);
-
-      if(userType === "customer"){
-        return router.push("/customer-detail")
+      if (userType === "customer") {
+        return router.push("/customer-detail");
+      } else {
+        const logged = await postData("/auth/create/agent", obj);
+        if (logged.success) {
+          Cookies.set("token", res.token);
+          toast.success("Successfully logegd in!");
+          router.push("/");
+        } else {
+          toast.error("Something went wrong!");
+        }
       }
-
-      // api call for agetn
-      ///re to
-
-  
     } catch (error: any) {
       console.log("Error: ", error);
+      toast.error("Something went wrong!");
     }
   };
 
