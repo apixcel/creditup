@@ -5,6 +5,7 @@ import {
   CardCvcElement,
   CardExpiryElement,
   CardNumberElement,
+  Elements,
   PaymentElement,
   PaymentRequestButtonElement,
   useElements,
@@ -16,6 +17,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
 import Button from "../steps/Button";
+import { stripePromise } from "./StripeWrapper";
 
 const StripeContainer = () => {
   const stripe = useStripe();
@@ -29,7 +31,7 @@ const StripeContainer = () => {
     useAppSelector((state) => state.customer);
   const user = useAppSelector((state) => state.user);
   const router = useRouter();
-
+  const [clientSecret, setClientSecret] = useState("");
   useEffect(() => {
     if (stripe) {
       const pr = stripe.paymentRequest({
@@ -52,29 +54,16 @@ const StripeContainer = () => {
     }
   }, [stripe]);
 
-  // useEffect(() => {
-  //   if (stripe) {
-  //     const pr = stripe.paymentRequest({
-  //       country: "US",
-  //       currency: "usd",
-  //       total: {
-  //         label: "Demo total",
-  //         amount: 1099,
-  //       },
-  //       requestPayerName: true,
-  //       requestPayerEmail: true,
-  //     });
-
-  //     // Check the availability of the Payment Request API.
-  //     pr.canMakePayment().then((result) => {
-  //       console.log(result, "result");
-
-  //       if (result) {
-  //         setPaymentRequest(pr);
-  //       }
-  //     });
-  //   }
-  // }, [stripe]);
+  useEffect(() => {
+    // Fetch the client secret from the server
+    fetch(`${BASEURL}/payment/create/intent`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount: 9.99 }),
+    })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data));
+  }, []);
 
   console.log(paymentRequest);
 
@@ -183,12 +172,12 @@ const StripeContainer = () => {
     </span>
   );
 
-  if (paymentRequest) {
+  if (paymentRequest && clientSecret) {
     return (
-      <div className="mt-[20px]">
+      <Elements stripe={stripePromise} options={{ clientSecret }}>
         <PaymentElement />
         <PaymentRequestButtonElement options={{ paymentRequest }} />
-      </div>
+      </Elements>
     );
   }
 
