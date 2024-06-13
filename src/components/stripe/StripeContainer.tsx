@@ -52,7 +52,7 @@ const StripeContainer = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ amount: 999 }),
+        body: JSON.stringify({ amount: 9.99 }),
       });
 
       if (!response.ok) {
@@ -66,7 +66,7 @@ const StripeContainer = () => {
         payment_method: {
           card: cardElement,
           billing_details: {
-            email: "valaaso@meena.com",
+            email: "user@mail.com",
           },
         },
       });
