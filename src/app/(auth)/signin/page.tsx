@@ -5,13 +5,13 @@ import Input from "@/components/steps/Input";
 import Card from "@/components/steps/card";
 import CheckBox from "@/components/ui/CheckBox";
 import RememberMe from "@/components/ui/RememberMe";
+import { postData } from "@/utils/fetchData";
 import { Form, Formik } from "formik";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import * as Yup from "yup";
-import Cookies from "js-cookie";
-import { postData } from "@/utils/fetchData";
-import { useRouter } from "next/navigation";
 
 const initialValues = {
   emailOrNumber: "",
@@ -40,12 +40,15 @@ const ValidationSchema = Yup.object().shape({
 const Page = () => {
   const [showPass, setShowPass] = useState(false);
   const [modalShow, setModalShow] = useState(false);
+  const [userType, setUserType] = useState<"customer" | "agent">("customer");
+  const [message, setMssage] = useState<string>("");
   const router = useRouter();
 
   const handleSubmit = async (values: any) => {
     try {
-      const res = await postData("/auth/login", values);
+      const res = await postData("/auth/login", { ...values, userType });
       if (!res.success) {
+        setMssage(res.message || "");
         setModalShow(true);
       } else {
         Cookies.set("token", res.token);
@@ -61,11 +64,11 @@ const Page = () => {
       {modalShow && (
         <div className="absolute inset-0 h-screen z-50 w-full bg-black/75 flex justify-center items-center">
           <div className="max-w-md bg-white rounded-md p-5 shadow-md">
-            <h3 className="text-xl text-slate-900 font-bold mb-3">
-              You don&apos;t have an account!
+            <h3 className="text-[18px] text-slate-900 font-[500] mb-3">
+              {message}
             </h3>
             <p className="text-sm text-slate-500 mb-5">
-              Please create an account now.
+              Do you need to create a new account?
             </p>
             <div className="grid grid-cols-3 gap-2">
               <button
@@ -85,7 +88,7 @@ const Page = () => {
         </div>
       )}
       <Card heading="Sign in to your account">
-        <CheckBox onChange={(e) => console.log(e)} />
+        <CheckBox onChange={(e) => setUserType(e)} />
         <Formik
           initialValues={initialValues}
           validationSchema={ValidationSchema}

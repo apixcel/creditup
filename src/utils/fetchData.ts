@@ -7,9 +7,7 @@ export async function postData(url: string, body: object) {
       },
       body: JSON.stringify(body),
     });
-
     const data = await response.json();
-
     return data;
   } catch (error) {
     console.error("Error fetching data:", error);

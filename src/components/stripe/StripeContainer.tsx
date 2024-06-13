@@ -5,12 +5,14 @@ import {
   CardCvcElement,
   CardExpiryElement,
   CardNumberElement,
+  PaymentRequestButtonElement,
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
+import { PaymentRequest } from "@stripe/stripe-js";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Toaster, toast } from "sonner";
 import Button from "../steps/Button";
 
@@ -19,10 +21,39 @@ const StripeContainer = () => {
   const elements = useElements();
   const [error, setError] = useState<string | null>("");
   const [loading, setLoading] = useState(false);
+  const [paymentRequest, setPaymentRequest] = useState<PaymentRequest | null>(
+    null
+  );
   const { creditUp, customer, customerAddress, customerDetail, circumstances } =
     useAppSelector((state) => state.customer);
   const user = useAppSelector((state) => state.user);
   const router = useRouter();
+
+  useEffect(() => {
+    if (stripe) {
+      const pr = stripe.paymentRequest({
+        country: "US",
+        currency: "usd",
+        total: {
+          label: "Demo total",
+          amount: 1099,
+        },
+        requestPayerName: true,
+        requestPayerEmail: true,
+      });
+
+      // Check the availability of the Payment Request API.
+      pr.canMakePayment().then((result) => {
+        console.log(result, "result");
+
+        if (result) {
+          setPaymentRequest(pr);
+        }
+      });
+    }
+  }, [stripe]);
+
+  console.log(paymentRequest);
 
   const handlePayment = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -82,7 +113,7 @@ const StripeContainer = () => {
         return setError(`Payment failed: ${errMessage}`);
       }
       if (result.error) {
-        toast.error("Something went wrong, try again letter");
+        toast.error("Something went wrong, try again later");
         console.log(result.error);
       } else if (result.paymentIntent.status === "succeeded") {
         const object = {
@@ -110,23 +141,29 @@ const StripeContainer = () => {
 
         const resData = await confirm.json();
         Cookies.set("token", resData.token);
-        toast.success("Payment successfull");
+        toast.success("Payment successful");
         router.push("/");
       }
     } catch (error: any) {
-      toast.error("Something went wrong while proccessing this payment");
+      toast.error("Something went wrong while processing this payment");
       // setError(`Error: ${error.message || ""}`);
     } finally {
       setLoading(false);
     }
   };
+  console.log(paymentRequest);
 
   const loader = (
     <span className="flex items-center justify-center gap-[5px]">
-      Payment Proccessing
+      Payment Processing
       <span className="rounded-md h-[25px] w-[25px] border-4 border-t-4 border-blue-500 animate-spin" />
     </span>
   );
+
+  if (paymentRequest) {
+    return <PaymentRequestButtonElement options={{ paymentRequest }} />;
+  }
+
   return (
     <form onSubmit={handlePayment}>
       <div className="flex flex-col gap-[8px] w-full">
@@ -172,6 +209,13 @@ const StripeContainer = () => {
         text={loading ? loader : "Pay by card"}
         disabled={loading}
       />
+
+      {paymentRequest && (
+        <div className="mt-[20px]">
+          <PaymentRequestButtonElement options={{ paymentRequest }} />
+        </div>
+      )}
+
       <Toaster richColors={true} position="top-center" />
     </form>
   );

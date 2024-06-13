@@ -8,26 +8,24 @@ import StepOne from "@/components/steps/StepOne";
 import StepThirteen from "@/components/steps/StepThirteen";
 import StepTwelve from "@/components/steps/StepTwelve";
 import StepTwo from "@/components/steps/StepTwo";
-import { resetStep } from "@/redux/features/customer-detail/customerDetailSlice";
 import { useAppSelector } from "@/redux/hook";
 import { useRouter } from "next/navigation";
-import { useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 
 const Steps = () => {
-  const { step } = useAppSelector((state) => state.customer);
+  const { step: chup } = useAppSelector((state) => state.customer);
   const user = useAppSelector((state) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
 
-  useLayoutEffect(() => {
-    dispatch(resetStep(undefined));
-    if (!user.emailOrNumber || !user.password) {
-      return router.push("/signup");
-    }
-  }, [dispatch, router, user]);
+  // useLayoutEffect(() => {
+  //   dispatch(resetStep(undefined));
+  //   if (!user.emailOrNumber || !user.password) {
+  //     return router.push("/signup");
+  //   }
+  // }, [dispatch, router, user]);
 
-  // let step = 10
+  let step = 8;
 
   return (
     <div className="py-[80px]">

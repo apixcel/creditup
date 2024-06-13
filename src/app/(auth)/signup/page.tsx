@@ -5,11 +5,13 @@ import Card from "@/components/steps/card";
 import CheckBox from "@/components/ui/CheckBox";
 import RememberMe from "@/components/ui/RememberMe";
 import { setUser } from "@/redux/features/user/userSlice";
+import { postData } from "@/utils/fetchData";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useDispatch } from "react-redux";
+import { toast } from "sonner";
 import * as Yup from "yup";
 
 const initialValues = {
@@ -52,21 +54,28 @@ const Page = () => {
     console.log(obj);
 
     try {
-      // const res = await postData("/auth/isexist", {
-      //   emailOrNumber: e.emailOrNumber,
-      // });
-      // if (!res) {
-      //   return console.log("Something went wrong!");
-      // }
+      const res = await postData("/auth/isexist", {
+        emailOrNumber: e.emailOrNumber,
+      });
+      if (!res) {
+        return console.log("Something went wrong!");
+      }
 
-      // // const response = await res.json();
-      // if (!res.success || res.duplicate) {
-      //   return toast.error(res.message);
-      // }
+      // const response = await res.json();
+      if (!res.success || res.duplicate) {
+        return toast.error(res.message);
+      }
       dispatch(setUser(obj));
 
       // Cookies.set("token", res.token);
-      userType === "customer" ? router.push("/customer-detail") : router.push("/");
+
+      if(userType === "customer"){
+        return router.push("/customer-detail")
+      }
+
+      
+
+  
     } catch (error: any) {
       console.log("Error: ", error);
     }
