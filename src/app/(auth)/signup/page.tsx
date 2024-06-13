@@ -74,7 +74,7 @@ const Page = () => {
         const logged = await postData("/auth/create/agent", obj);
         if (logged.success) {
           Cookies.set("token", res.token);
-          toast.success("Successfully Registered!");
+          toast.success("Successfully Registered the Agent!");
           router.push("/");
         } else {
           toast.error("Something went wrong!");
