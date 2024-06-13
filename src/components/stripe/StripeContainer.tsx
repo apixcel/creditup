@@ -5,6 +5,7 @@ import {
   CardCvcElement,
   CardExpiryElement,
   CardNumberElement,
+  PaymentElement,
   PaymentRequestButtonElement,
   useElements,
   useStripe,
@@ -32,10 +33,10 @@ const StripeContainer = () => {
   useEffect(() => {
     if (stripe) {
       const pr = stripe.paymentRequest({
-        country: 'US',
-        currency: 'usd',
+        country: "US",
+        currency: "usd",
         total: {
-          label: 'Demo total',
+          label: "Demo total",
           amount: 1099,
         },
         requestPayerName: true,
@@ -43,7 +44,7 @@ const StripeContainer = () => {
       });
 
       // Check the availability of the Payment Request API.
-      pr.canMakePayment().then(result => {
+      pr.canMakePayment().then((result) => {
         if (result) {
           setPaymentRequest(pr);
         }
@@ -183,7 +184,12 @@ const StripeContainer = () => {
   );
 
   if (paymentRequest) {
-    return <PaymentRequestButtonElement options={{ paymentRequest }} />;
+    return (
+      <div className="mt-[20px]">
+        <PaymentElement />
+        <PaymentRequestButtonElement options={{ paymentRequest }} />
+      </div>
+    );
   }
 
   return (
@@ -231,12 +237,6 @@ const StripeContainer = () => {
         text={loading ? loader : "Pay by card"}
         disabled={loading}
       />
-
-      {paymentRequest && (
-        <div className="mt-[20px]">
-          <PaymentRequestButtonElement options={{ paymentRequest }} />
-        </div>
-      )}
 
       <Toaster richColors={true} position="top-center" />
     </form>
