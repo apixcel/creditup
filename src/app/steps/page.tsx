@@ -2,6 +2,7 @@
 
 import StepEight from "@/components/steps/StepEight";
 import StepEleven from "@/components/steps/StepEleven";
+import StepFive from "@/components/steps/StepFive";
 import StepFour from "@/components/steps/StepFour";
 import StepNine from "@/components/steps/StepNine";
 import StepOne from "@/components/steps/StepOne";
@@ -34,11 +35,12 @@ const Steps = () => {
       {step === 1 && <StepOne />}
       {step === 2 && <StepTwo />}
       {step === 3 && <StepFour />}
-      {step === 4 && <StepEight />}
-      {step === 5 && <StepNine />}
-      {step === 6 && <StepEleven />}
-      {step === 7 && <StepTwelve />}
-      {step === 8 && <StepThirteen />}
+      {step === 4 && <StepFive />}
+      {step === 5 && <StepEight />}
+      {step === 6 && <StepNine />}
+      {step === 7 && <StepEleven />}
+      {step === 8 && <StepTwelve />}
+      {step === 9 && <StepThirteen />}
     </div>
   );
 };
