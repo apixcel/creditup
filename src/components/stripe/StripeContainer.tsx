@@ -171,6 +171,7 @@ const StripeContainer = () => {
       <span className="rounded-md h-[25px] w-[25px] border-4 border-t-4 border-blue-500 animate-spin" />
     </span>
   );
+  console.log(clientSecret, "client sec");
 
   if (paymentRequest && clientSecret) {
     return (
