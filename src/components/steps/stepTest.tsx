@@ -38,6 +38,7 @@ const StepTest = () => {
         onLoadPaymentData={(paymentRequest) => {
           console.log("load payment data", paymentRequest);
         }}
+        // on
       />
     </div>
   );
