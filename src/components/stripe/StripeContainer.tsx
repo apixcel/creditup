@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Toaster, toast } from "sonner";
 import Button from "../steps/Button";
+import PayWithGoogle from "../steps/stepTest";
 
 const StripeContainer = () => {
   const stripe = useStripe();
@@ -132,53 +133,61 @@ const StripeContainer = () => {
   );
 
   return (
-    <form onSubmit={handlePayment}>
-      <div className="flex flex-col gap-[8px] w-full">
-        <label htmlFor="card-nr" className="label">
-          Card number
-        </label>
-        <div className="px-[20px] w-full flex justify-center items-center h-[50px] border-[1px] border-[#E2E8F0] rounded-[15px]">
-          <CardNumberElement
-            id="card-nr"
-            className="text-[16px] font-[500] bg-white w-full text-[#B4BFCD]"
-          />
-        </div>
-      </div>
-
-      <div className="flex items-start justify-start gap-[22px] w-full mt-[20px]">
+    <>
+      <form onSubmit={handlePayment}>
         <div className="flex flex-col gap-[8px] w-full">
-          <label htmlFor="card-ex" className="label">
-            Card expiry
+          <label htmlFor="card-nr" className="label">
+            Card number
           </label>
           <div className="px-[20px] w-full flex justify-center items-center h-[50px] border-[1px] border-[#E2E8F0] rounded-[15px]">
-            <CardExpiryElement
-              id="card-ex"
+            <CardNumberElement
+              id="card-nr"
               className="text-[16px] font-[500] bg-white w-full text-[#B4BFCD]"
             />
           </div>
         </div>
-        <div className="flex flex-col gap-[8px] w-full">
-          <label htmlFor="card-cv" className="label">
-            CVC
-          </label>
-          <div className="px-[20px] w-full flex justify-center items-center h-[50px] border-[1px] border-[#E2E8F0] rounded-[15px]">
-            <CardCvcElement
-              id="card-cv"
-              className="text-[16px] font-[500] bg-white w-full text-[#B4BFCD]"
-            />
+
+        <div className="flex items-start justify-start gap-[22px] w-full mt-[20px]">
+          <div className="flex flex-col gap-[8px] w-full">
+            <label htmlFor="card-ex" className="label">
+              Card expiry
+            </label>
+            <div className="px-[20px] w-full flex justify-center items-center h-[50px] border-[1px] border-[#E2E8F0] rounded-[15px]">
+              <CardExpiryElement
+                id="card-ex"
+                className="text-[16px] font-[500] bg-white w-full text-[#B4BFCD]"
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-[8px] w-full">
+            <label htmlFor="card-cv" className="label">
+              CVC
+            </label>
+            <div className="px-[20px] w-full flex justify-center items-center h-[50px] border-[1px] border-[#E2E8F0] rounded-[15px]">
+              <CardCvcElement
+                id="card-cv"
+                className="text-[16px] font-[500] bg-white w-full text-[#B4BFCD]"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      {error && <div className="error">{error}</div>}
-      <Button
-        className="w-full mt-[40px]"
-        type="submit"
-        text={loading ? loader : "Pay by card"}
-        disabled={loading}
-      />
+        {error && <div className="error">{error}</div>}
+        <Button
+          className="w-full mt-[40px]"
+          type="submit"
+          text={loading ? loader : "Pay by card"}
+          disabled={loading}
+        />
 
-      <Toaster richColors={true} position="top-center" />
-    </form>
+        <Toaster richColors={true} position="top-center" />
+      </form>
+
+      <div className="flex flex-col justify-center items-center gap-[20px] py-[15px] mt-[20px]">
+        <hr className="w-full" />
+        <span className="text-[13px] text-gray-300">or</span>
+        <PayWithGoogle />
+      </div>
+    </>
   );
 };
 
