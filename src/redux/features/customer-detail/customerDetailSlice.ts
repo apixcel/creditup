@@ -136,7 +136,7 @@ const customerSlice = createSlice({
     },
     setCreditUp(state, action: PayloadAction<CreditUpType[]>) {
       state.creditUp = action.payload;
-      // state.step++;
+      state.step++;
     },
     setCustomerDetailPaymentDate(
       state,
@@ -147,8 +147,6 @@ const customerSlice = createSlice({
     },
     setCircumstances(state, action: PayloadAction<Circumstances>) {
       state.circumstances = action.payload;
-
-      
     },
   },
 });

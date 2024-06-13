@@ -73,7 +73,8 @@ const Page = () => {
         return router.push("/customer-detail")
       }
 
-      
+      // api call for agetn
+      ///re to
 
   
     } catch (error: any) {
