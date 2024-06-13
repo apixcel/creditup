@@ -37,7 +37,7 @@ const StepTwelve = () => {
       >
         {({ setFieldValue, values, errors, touched }) => (
           <Form>
-            <Warning text="Please select the best date each month for us to take your payment of £9.99" />
+            <Warning text="Please select the best date each month for us to take your payment of £24.99" />
             <div>
               <label htmlFor="date" className="label">
                 Payment Date
