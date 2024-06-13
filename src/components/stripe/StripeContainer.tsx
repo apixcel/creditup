@@ -32,10 +32,10 @@ const StripeContainer = () => {
   useEffect(() => {
     if (stripe) {
       const pr = stripe.paymentRequest({
-        country: "US",
-        currency: "usd",
+        country: 'US',
+        currency: 'usd',
         total: {
-          label: "Demo total",
+          label: 'Demo total',
           amount: 1099,
         },
         requestPayerName: true,
@@ -43,15 +43,37 @@ const StripeContainer = () => {
       });
 
       // Check the availability of the Payment Request API.
-      pr.canMakePayment().then((result) => {
-        console.log(result, "result");
-
+      pr.canMakePayment().then(result => {
         if (result) {
           setPaymentRequest(pr);
         }
       });
     }
   }, [stripe]);
+
+  // useEffect(() => {
+  //   if (stripe) {
+  //     const pr = stripe.paymentRequest({
+  //       country: "US",
+  //       currency: "usd",
+  //       total: {
+  //         label: "Demo total",
+  //         amount: 1099,
+  //       },
+  //       requestPayerName: true,
+  //       requestPayerEmail: true,
+  //     });
+
+  //     // Check the availability of the Payment Request API.
+  //     pr.canMakePayment().then((result) => {
+  //       console.log(result, "result");
+
+  //       if (result) {
+  //         setPaymentRequest(pr);
+  //       }
+  //     });
+  //   }
+  // }, [stripe]);
 
   console.log(paymentRequest);
 
