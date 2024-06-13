@@ -54,7 +54,7 @@ const StripeContainer = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ amount: 9.99 }),
+        body: JSON.stringify({ amount: 24.99 }),
       });
 
       if (!response.ok) {
