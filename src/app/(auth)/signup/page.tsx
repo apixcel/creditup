@@ -69,7 +69,7 @@ const Page = () => {
       dispatch(setUser(obj));
 
       if (userType === "customer") {
-        return router.push("/customer-detail");
+        return router.push("/steps");
       } else {
         const logged = await postData("/auth/create/agent", obj);
         if (logged.success) {
