@@ -33,7 +33,7 @@ const StepNine = () => {
               setCurrentItem(item.value);
               dispatch(setCustomerDetailStatus({ status: item?.value }));
             }}
-            className={`outline hover:outline-slate-800 border-2 hover:border-white w-full py-[12px] px-[24px] bg-[#0A5047] text-white rounded-[12px] ${
+            className={`outline hover:outline-slate-800 border-2 hover:border-white w-full py-[12px] px-[24px] bg-slate-950 text-white rounded-[12px] ${
               item.value === currentItem
                 ? "outline outline-slate-800 border-2 border-white"
                 : ""

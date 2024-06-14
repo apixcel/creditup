@@ -3,7 +3,7 @@
 
 @layer components {
   .btn {
-    @apply w-full py-[12px] px-[24px] bg-[#0A5047] text-white rounded-[12px];
+    @apply w-full py-[12px] px-[24px] bg-slate-950 text-white rounded-[12px];
   }
 
   .label {

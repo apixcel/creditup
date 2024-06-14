@@ -22,7 +22,7 @@ const RememberMe: React.FC<DataType> = ({ onClick }) => {
     <div className="flex justify-start items-center gap-[10px]">
       <div
         className={`w-[36px] h-[18px] ${
-          isOn ? "bg-[#0A5047]" : "bg-[#858585]"
+          isOn ? "bg-slate-950" : "bg-[#858585]"
         } flex items-center rounded-full relative p-[3px]  cursor-pointer`}
         onClick={handleToggle}
       >
