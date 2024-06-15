@@ -27,7 +27,7 @@ const Steps = () => {
       return router.push("/signup");
     }
   }, [dispatch, router, user]);
-
+  // let step = 9
   return (
     <div className="py-[80px]">
       {step === 1 && <StepOne />}

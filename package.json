@@ -16,6 +16,7 @@
     "@stripe/react-stripe-js": "^2.7.1",
     "@stripe/stripe-js": "^3.5.0",
     "@tabler/icons-react": "^3.1.0",
+    "@tap-payments/apple-pay-button": "^1.0.19",
     "clsx": "^2.1.0",
     "date-fns": "^3.6.0",
     "formik": "^2.4.6",

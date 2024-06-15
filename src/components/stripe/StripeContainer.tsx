@@ -13,7 +13,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Toaster, toast } from "sonner";
 import Button from "../steps/Button";
-import PayWithGoogle from "../steps/stepTest";
+import PayWithApple from "../steps/PayWithApple";
+import PayWithGoogle from "../steps/PayWithGoogle";
 
 const StripeContainer = () => {
   const stripe = useStripe();
@@ -185,7 +186,10 @@ const StripeContainer = () => {
       <div className="flex flex-col justify-center items-center gap-[20px] py-[15px] mt-[20px]">
         <hr className="w-full" />
         <span className="text-[13px] text-gray-300">or</span>
-        <PayWithGoogle />
+        <div className="flex items-center justify-center gap-[50px]">
+          <PayWithGoogle />
+          <PayWithApple />
+        </div>
       </div>
     </>
   );
