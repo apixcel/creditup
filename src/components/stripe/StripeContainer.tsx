@@ -17,6 +17,8 @@ import PayWithApple from "../steps/PayWithApple";
 import PayWithGoogle from "../steps/PayWithGoogle";
 
 const StripeContainer = () => {
+  console.log({ BASEURL });
+
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState<string | null>("");
@@ -64,6 +66,7 @@ const StripeContainer = () => {
       }
 
       const { data: clientSecret } = await response.json();
+      console.log({ clientSecret });
 
       // Confirm the Payment
       const result = await stripe.confirmCardPayment(clientSecret, {
