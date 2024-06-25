@@ -17,7 +17,9 @@ import PayWithApple from "../steps/PayWithApple";
 import PayWithGoogle from "../steps/PayWithGoogle";
 
 const StripeContainer = () => {
-  console.log({ BASEURL });
+  const { customerDetail: customer_details } = useAppSelector(
+    (state) => state.customer
+  );
 
   const stripe = useStripe();
   const elements = useElements();
@@ -52,75 +54,62 @@ const StripeContainer = () => {
 
     try {
       // Create Payment Intent on the backend
-      const response = await fetch(`${BASEURL}/payment/create/intent`, {
+      const email = customer_details.email || "test@email.com";
+      const { error, paymentMethod } = await stripe.createPaymentMethod({
+        type: "card",
+        card: cardElement,
+        billing_details: { email },
+      });
+
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+
+      const response = await fetch(`${BASEURL}/payment/create/subscription`, {
         method: "POST",
         // mode: "no-cors",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ amount: 24.99 }),
+        body: JSON.stringify({ email, paymentMethodId: paymentMethod.id }),
       });
 
       if (!response.ok) {
+        toast.error("Something went wrong while proccessing this payment");
         throw new Error("Failed to create payment intent.");
       }
 
-      const { data: clientSecret } = await response.json();
-      console.log({ clientSecret });
+      const object = {
+        ...user,
+        creditUp,
+        ...customer,
+        ...customerAddress,
+        ...customerDetail,
+        ...circumstances,
+      };
 
-      // Confirm the Payment
-      const result = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: cardElement,
-          billing_details: {
-            email: "user@mail.com",
-          },
+      const confirm = await fetch(`${BASEURL}/payment/confirm`, {
+        method: "POST",
+        // mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify(object),
       });
 
-      const errMessage = result.error?.message || "";
-      const displayErr = [
-        "Your card number is incomplete.",
-        "Your card's expiration date is incomplete.",
-        "Your card's security code is incomplete.",
-      ];
-
-      if (displayErr.includes(errMessage)) {
-        return setError(`Payment failed: ${errMessage}`);
+      if (!confirm.ok) {
+        return toast.error("Something went wrong while creating your account");
       }
-      if (result.error) {
-        toast.error("Something went wrong, try again later");
-        console.log(result.error);
-      } else if (result.paymentIntent.status === "succeeded") {
-        const object = {
-          ...user,
-          creditUp,
-          ...customer,
-          ...customerAddress,
-          ...customerDetail,
-          ...circumstances,
-        };
 
-        const confirm = await fetch(`${BASEURL}/payment/confirm`, {
-          method: "POST",
-          // mode: "no-cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(object),
-        });
+      const resData = await confirm.json();
 
-        if (!confirm.ok) {
-          return toast.error(
-            "Something went wrong while creating your account"
-          );
-        }
+      const subscription = await response.json();
+      console.log(subscription);
 
-        const resData = await confirm.json();
-        Cookies.set("token", resData.token);
-        toast.success("Payment successful");
-        router.push("/");
-      }
+      Cookies.set("token", resData.token);
+      toast.success("Payment successful");
+      router.push("/");
     } catch (error: any) {
       toast.error("Something went wrong while processing this payment");
       // setError(`Error: ${error.message || ""}`);
