@@ -12,7 +12,7 @@ import StepTwo from "@/components/steps/StepTwo";
 import { resetStep } from "@/redux/features/customer-detail/customerDetailSlice";
 import { useAppSelector } from "@/redux/hook";
 import { useRouter } from "next/navigation";
-import { useLayoutEffect } from "react";
+import { useLayoutEffect as useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 const Steps = () => {
@@ -21,7 +21,7 @@ const Steps = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     dispatch(resetStep(undefined));
     if (!user.emailOrNumber || !user.password) {
       return router.push("/signup");
