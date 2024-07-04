@@ -5,7 +5,6 @@ import {
   CreditUpType,
   setCircumstances,
   setCreditUp,
-  setCustomer,
 } from "@/redux/features/customer-detail/customerDetailSlice";
 import { useAppDispatch } from "@/redux/hook";
 import {
@@ -46,12 +45,12 @@ const StepEleven = () => {
       curCreditorRepayment: toatlContributeBalance,
       newCreditorRepayment: toatlContributeBalance * 0.5,
       monthlySaving: toatlContributeBalance * 0.5 * 0.5,
-      yearlySaving:toatlContributeBalance * 0.5 * 0.5 *12,
-      totalLender:numberOflenders
+      yearlySaving: toatlContributeBalance * 0.5 * 0.5 * 12,
+      totalLender: numberOflenders,
     };
 
     dispatch(setCreditUp(dataArr as CreditUpType[]));
-    dispatch(setCircumstances(circumstance))
+    dispatch(setCircumstances(circumstance));
   };
 
   // add more input feilds

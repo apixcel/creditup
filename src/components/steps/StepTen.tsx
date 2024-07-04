@@ -1,9 +1,9 @@
 "use client";
 
+import { setCustomerDetailTotal } from "@/redux/features/customer-detail/customerDetailSlice";
+import { useAppDispatch } from "@/redux/hook";
 import { useState } from "react";
 import StepBody from "../shared/StepBody";
-import { useAppDispatch } from "@/redux/hook";
-import { setCustomerDetailTotal } from "@/redux/features/customer-detail/customerDetailSlice";
 
 const StepTen = () => {
   const [currentItem, setCurrentItem] = useState<string>("");

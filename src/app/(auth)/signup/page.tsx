@@ -7,13 +7,13 @@ import RememberMe from "@/components/ui/RememberMe";
 import { setUser } from "@/redux/features/user/userSlice";
 import { postData } from "@/utils/fetchData";
 import { Form, Formik } from "formik";
+import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import * as Yup from "yup";
-import Cookies from "js-cookie";
 
 const initialValues = {
   emailOrNumber: "",
