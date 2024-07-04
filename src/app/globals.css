@@ -13,6 +13,9 @@
   .errorMessage {
     @apply text-red-500 text-sm;
   }
+  .center {
+    @apply flex items-center justify-center;
+  }
 }
 
 @tailwind utilities;
