@@ -109,7 +109,7 @@ const StripeContainer = () => {
 
       Cookies.set("token", resData.token);
       toast.success("Payment successful");
-      // router.push("/");
+      router.push("/");
     } catch (error: any) {
       toast.error("Something went wrong while processing this payment");
       // setError(`Error: ${error.message || ""}`);
