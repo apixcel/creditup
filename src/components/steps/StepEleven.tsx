@@ -243,7 +243,7 @@ const StepEleven = () => {
                 {toatlOutStandingBalance}£
               </p>
               <p className="text-[16px] font-medium leading-[26px]">
-                {toatlContributeBalance}
+                {toatlContributeBalance}£
               </p>
               <p className="text-[16px] font-medium leading-[26px]">
                 {numberOflenders}
