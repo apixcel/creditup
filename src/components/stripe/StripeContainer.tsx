@@ -62,7 +62,7 @@ const StripeContainer = () => {
       });
 
       if (error) {
-        toast.error(error.message);
+        toast.error("Something went wrong while proccessing this payment");
         return;
       }
 
