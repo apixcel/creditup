@@ -15,7 +15,7 @@ const FormSchema = Yup.object().shape({
   buildingNumber: Yup.string().required("Building number is required"),
   streetName: Yup.string().required("Street name is required"),
   city: Yup.string().required("City is required"),
-  country: Yup.string().required("Country is required"),
+  country: Yup.string().required("Post code is required"),
 });
 
 const StepEight = () => {
