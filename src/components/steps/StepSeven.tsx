@@ -1,7 +1,7 @@
 "use client";
 
 import { setCustomerDetailPhone } from "@/redux/features/customer-detail/customerDetailSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import StepBody from "../shared/StepBody";
@@ -17,8 +17,10 @@ const FormSchema = Yup.object().shape({
 });
 
 const StepSeven = () => {
+  const { phone } = useAppSelector((state) => state.customer.customerDetail);
+
   const initialValue = {
-    phone: "",
+    phone,
   };
   const dispatch = useAppDispatch();
   const handleSubmit = (values: any) => {

@@ -6,7 +6,7 @@ import {
   setCircumstances,
   setCreditUp,
 } from "@/redux/features/customer-detail/customerDetailSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import {
   generateCreditupInitValue,
   generateValidationSchema,
@@ -18,12 +18,22 @@ import StepBody from "../shared/StepBody";
 import Button from "./Button";
 import StepBackButton from "./StepBackButton";
 
-const StepEleven = () => {
-  const dispatch = useAppDispatch();
-  const [numberOflenders, setNumberOFLenders] = useState<1 | 2 | 3>(1);
+type TLenderCount = 1 | 2 | 3;
 
-  const [toatlOutStandingBalance, setTotalOutStandingBalance] = useState(0);
-  const [toatlContributeBalance, setTotalContributeBalance] = useState(0);
+const StepEleven = () => {
+  const { creditUp, circumstances } = useAppSelector((state) => state.customer);
+
+  const dispatch = useAppDispatch();
+  const [numberOflenders, setNumberOFLenders] = useState<TLenderCount>(
+    (creditUp.length as TLenderCount) || 1
+  );
+
+  const [toatlOutStandingBalance, setTotalOutStandingBalance] = useState(
+    circumstances.totalDebtLevel || 0
+  );
+  const [toatlContributeBalance, setTotalContributeBalance] = useState(
+    circumstances.curCreditorRepayment || 0
+  );
 
   const handleSubmit = (values: any) => {
     // const feildNames = ["lender", "outstandingBalance", "contribute"];
@@ -119,7 +129,7 @@ const StepEleven = () => {
   return (
     <StepBody title="Which lenders do you owe money to? If the account is with a debt collector, who is it?">
       <Formik
-        initialValues={generateCreditupInitValue(numberOflenders)}
+        initialValues={generateCreditupInitValue(numberOflenders,creditUp)}
         validationSchema={generateValidationSchema(numberOflenders)}
         onSubmit={handleSubmit}
       >

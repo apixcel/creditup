@@ -1,3 +1,4 @@
+import { CreditUpType } from "@/redux/features/customer-detail/customerDetailSlice";
 import * as Yup from "yup";
 
 type SchemaFields = {
@@ -19,12 +20,16 @@ export const generateValidationSchema = (numLenders: number) => {
   return Yup.object().shape(schemaFields);
 };
 
-export const generateCreditupInitValue = (numLenders: number) => {
+export const generateCreditupInitValue = (
+  numLenders: number,
+  creditUp: CreditUpType[]
+) => {
   const initialValues: Record<string, unknown> = {};
   for (let i = 0; i < numLenders; i++) {
-    initialValues[`lender${i + 1}`] = "";
-    initialValues[`outstandingBalance${i + 1}`] = "";
-    initialValues[`contribute${i + 1}`] = "";
+    initialValues[`lender${i + 1}`] = creditUp[i]?.lender || "";
+    initialValues[`outstandingBalance${i + 1}`] =
+      creditUp[i]?.outstandingBalance || "";
+    initialValues[`contribute${i + 1}`] = creditUp[i]?.contribute || "";
   }
   return initialValues;
 };

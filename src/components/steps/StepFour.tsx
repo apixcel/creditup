@@ -1,7 +1,7 @@
 "use client";
 
 import { setCustomerDetailDateOfBirth } from "@/redux/features/customer-detail/customerDetailSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { isDate, parse, subYears } from "date-fns";
 import { ErrorMessage, Form, Formik } from "formik";
 import DatePicker from "react-datepicker";
@@ -35,11 +35,14 @@ const validationSchema = Yup.object().shape({
 
 const StepFour = () => {
   const dispatch = useAppDispatch();
+  const { dateOfBirth } = useAppSelector(
+    (state) => state.customer.customerDetail
+  );
 
   return (
     <StepBody title="What's your date of birth?">
       <Formik
-        initialValues={{ date: "" }}
+        initialValues={{ date: dateOfBirth }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log(values);

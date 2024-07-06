@@ -1,7 +1,7 @@
 "use client";
 
 import { setCustomerAddress } from "@/redux/features/customer-detail/customerDetailSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import RedNote from "../shared/RedNote";
@@ -19,13 +19,22 @@ const FormSchema = Yup.object().shape({
 });
 
 const StepEight = () => {
+  const {
+    buildingName,
+    city,
+    buildingNumber,
+    country,
+    streetName,
+    subBuildingName,
+  } = useAppSelector((state) => state.customer.customerAddress);
+
   const initialValue = {
-    buildingNumber: "",
-    subBuildingName: "",
-    buildingName: "",
-    streetName: "",
-    city: "",
-    country: "",
+    buildingNumber,
+    subBuildingName,
+    buildingName,
+    streetName,
+    city,
+    country,
   };
 
   const dispatch = useAppDispatch();

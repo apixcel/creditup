@@ -1,7 +1,7 @@
 "use client";
 
 import { setCustomerDetailPaymentDate } from "@/redux/features/customer-detail/customerDetailSlice";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { isDate, parse } from "date-fns";
 import { ErrorMessage, Form, Formik } from "formik";
 import DatePicker from "react-datepicker";
@@ -24,12 +24,16 @@ const validationSchema = Yup.object().shape({
 });
 
 const StepTwelve = () => {
+  const { paymentDate } = useAppSelector(
+    (state) => state.customer.customerDetail
+  );
+
   const dispatch = useAppDispatch();
 
   return (
     <StepBody title="Payment Date">
       <Formik
-        initialValues={{ date: "" }}
+        initialValues={{ date: paymentDate }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log(values);
