@@ -16,6 +16,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import StepBody from "../shared/StepBody";
 import Button from "./Button";
+import StepBackButton from "./StepBackButton";
 
 const StepEleven = () => {
   const dispatch = useAppDispatch();
@@ -181,7 +182,7 @@ const StepEleven = () => {
                   htmlFor={`contribute${i + 1}`}
                   className={`label text-center`}
                 >
-                  How much do you contribute towards (lender {i + 1})?
+                  How much do you contribute towards lender?
                 </label>
                 <Field
                   type="number"
@@ -208,10 +209,10 @@ const StepEleven = () => {
             name="anotherLender"
             id="anotherLender"
           /> */}
-          <p className="text-center text-[16px] leading-[26px] font-light italic max-w-[586px] mx-auto">
+          {/* <p className="text-center text-[16px] leading-[26px] font-light italic max-w-[586px] mx-auto">
             After the customer has filled out all their debt information, a
             summary should be shown such as:
-          </p>
+          </p> */}
           <div className="mt-5 lg:mt-[70px]">
             <p className="text-[18px] text-center font-medium leading-[26px] mb-[40px]">
               {`Let's Review your current circumstances`}
@@ -223,11 +224,13 @@ const StepEleven = () => {
               <p className="text-[16px] font-medium leading-[26px]">
                 Current creditor repayments
               </p>
-              <p className="text-[16px] font-medium leading-[26px]">Total</p>
+              <p className="text-[16px] font-medium leading-[26px]">
+                Total Accounts
+              </p>
             </div>
             <div className="flex justify-between items-center gap-1 bg-[#C6D4E0] py-[12px] px-[24px] rounded-[12px] text-[16px] font-medium leading-[26px] mb-[32px]">
               <p className="text-[16px] font-medium leading-[26px]">
-                {toatlOutStandingBalance}
+                {toatlOutStandingBalance}£
               </p>
               <p className="text-[16px] font-medium leading-[26px]">
                 {toatlContributeBalance}
@@ -254,19 +257,24 @@ const StepEleven = () => {
             </div>
             <div className="flex justify-between items-center gap-1 bg-[#C6D4E0] py-[12px] px-[24px] rounded-[12px] text-[16px] font-medium leading-[26px] mb-[32px]">
               <p className="text-[16px] font-medium leading-[26px]">
-                {toatlContributeBalance * 0.5}
+                {toatlContributeBalance * 0.5}£
               </p>
               <p className="text-[16px] font-medium leading-[26px]">
-                {toatlContributeBalance * 0.5 * 0.5}
+                {toatlContributeBalance * 0.5 * 0.5}£
               </p>
               <p className="text-[16px] font-medium leading-[26px]">
-                {toatlContributeBalance * 0.5 * 0.5 * 12}
+                {toatlContributeBalance * 0.5 * 0.5 * 12}£
               </p>
             </div>
           </div>
-          <Button text=" Continue" type="submit" className="mt-10 w-full" />
+          <Button
+            text="Continue with my SAVING ARRANGEMENT"
+            type="submit"
+            className="mt-10 w-full"
+          />
         </Form>
       </Formik>
+      <StepBackButton />
     </StepBody>
   );
 };

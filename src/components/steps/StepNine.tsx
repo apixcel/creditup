@@ -4,27 +4,31 @@ import { setCustomerDetailStatus } from "@/redux/features/customer-detail/custom
 import { useAppDispatch } from "@/redux/hook";
 import { useState } from "react";
 import StepBody from "../shared/StepBody";
+import StepBackButton from "./StepBackButton";
 
 const StepNine = () => {
   const [currentItem, setCurrentItem] = useState<string>("");
   const dispatch = useAppDispatch();
   const status = [
     {
-      value: "Home owner with mortgage",
+      value: "Home owner",
     },
     {
-      value: "Home owner with no mortgage",
+      value: "Private Renting",
     },
     {
-      value: "Renting",
+      value: "Council Tenant",
     },
     {
       value: "Living with parents",
     },
+    {
+      value: "Other",
+    },
   ];
 
   return (
-    <StepBody title="What is your status?">
+    <StepBody title="what is your residential status">
       <div className="flex flex-col gap-6">
         {status.map((item, index) => (
           <button
@@ -42,6 +46,7 @@ const StepNine = () => {
           </button>
         ))}
       </div>
+      <StepBackButton />
     </StepBody>
   );
 };

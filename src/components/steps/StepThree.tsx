@@ -6,6 +6,7 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import StepBody from "../shared/StepBody";
 import Input from "./Input";
+import StepBackButton from "./StepBackButton";
 
 const FormSchema = Yup.object().shape({
   firstName: Yup.string().required("You must enter the firstName"),
@@ -38,6 +39,7 @@ const StepThree = () => {
           </button>
         </Form>
       </Formik>
+      <StepBackButton />
     </StepBody>
   );
 };

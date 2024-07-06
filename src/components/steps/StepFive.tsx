@@ -8,6 +8,7 @@ import StepBody from "../shared/StepBody";
 import Warning from "../shared/Warning";
 import Button from "./Button";
 import Input from "./Input";
+import StepBackButton from "./StepBackButton";
 
 const FormSchema = Yup.object().shape({
   email: Yup.string().email().required("You must enter the email"),
@@ -36,6 +37,7 @@ const StepFive = () => {
           <Button text=" Continue" type="submit" className="mt-10 w-full" />
         </Form>
       </Formik>
+      <StepBackButton />
     </StepBody>
   );
 };

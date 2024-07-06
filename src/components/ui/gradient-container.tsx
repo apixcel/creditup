@@ -8,10 +8,7 @@ const GradientContainer: React.FC<{ children: ReactNode }> = ({ children }) => {
       href: "#",
       text: "Privacy Policy",
     },
-    {
-      href: "#",
-      text: "Privacy Policy",
-    },
+
     {
       href: "#",
       text: "License",
@@ -38,7 +35,7 @@ const GradientContainer: React.FC<{ children: ReactNode }> = ({ children }) => {
         {children}
       </div>
       <div className="flex justify-center md:justify-between flex-wrap gap-[15px] items-center w-[90%] lg:w-[900px]">
-        <h6 className="text-[#718096]">@ 2024, Made with ❤️ by CreditUP</h6>
+        <h6 className="text-[#718096]">@ 2024, Made with ❤️ by Creditup</h6>
         <div className="center gap-[10px] text-[#718096]">
           {footer.map(({ href, text }, i) => (
             <Link href={href} key={i + "footer link"}>

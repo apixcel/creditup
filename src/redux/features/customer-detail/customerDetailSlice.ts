@@ -20,8 +20,8 @@ export type CustomerDetailType = {
   firstName: string;
   lastName: string;
   paymentDate: string;
- password:string
- phone:string,
+  password: string;
+  phone: string;
 };
 
 export type CustomerAddressType = {
@@ -57,10 +57,10 @@ export const CustomerInfo: CustomerInfoType = {
   },
   customerDetail: {
     describe: "",
-    phone:"",
+    phone: "",
     title: "",
     dateOfBirth: "",
-    password:"",
+    password: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -97,6 +97,15 @@ const customerSlice = createSlice({
   reducers: {
     resetStep(state, action) {
       state.step = 1;
+    },
+    decreaseStep(state, action) {
+      const currentStet = state.step;
+
+      if (currentStet == 1) {
+        state.step = 1;
+        return;
+      }
+      state.step -= 1;
     },
     setCustomer(state, action: PayloadAction<CustomerType>) {
       state.customer = action.payload;
@@ -191,6 +200,7 @@ export const {
   setCustomerDetailTotal,
   resetStep,
   setCircumstances,
+  decreaseStep,
 } = customerSlice.actions;
 
 export default customerSlice.reducer;

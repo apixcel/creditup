@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import StepBody from "../shared/StepBody";
 import Warning from "../shared/Warning";
 import Input from "./Input";
+import StepBackButton from "./StepBackButton";
 
 const FormSchema = Yup.object().shape({
   password: Yup.string()
@@ -56,6 +57,7 @@ const StepSix = () => {
           </button>
         </Form>
       </Formik>
+      <StepBackButton/>
     </StepBody>
   );
 };

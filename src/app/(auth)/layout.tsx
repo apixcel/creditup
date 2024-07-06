@@ -7,9 +7,9 @@ const layout: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <GradientContainer>
       <Link href={"/"} className="w-full flex justify-center items-center">
-        <Image src={"/img/logo.png"} alt="logo" width={296} height={96} />
+        <Image src={"/svg/Logo.svg"} alt="logo" width={296} height={96} />
       </Link>
-      <div className="mt-[78px]">{children}</div>
+      <div className="mt-[50px]">{children}</div>
     </GradientContainer>
   );
 };

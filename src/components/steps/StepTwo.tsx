@@ -4,6 +4,7 @@ import { setCustomerDetailTitle } from "@/redux/features/customer-detail/custome
 import { useAppDispatch } from "@/redux/hook";
 import { useState } from "react";
 import StepBody from "../shared/StepBody";
+import StepBackButton from "./StepBackButton";
 
 const StepTwo = () => {
   const [currentItem, setCurrentItem] = useState<string>("");
@@ -49,6 +50,8 @@ const StepTwo = () => {
             </button>
           ))}
         </div>
+      <StepBackButton />
+
       </StepBody>
     </>
   );
