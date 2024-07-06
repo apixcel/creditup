@@ -40,24 +40,26 @@ const StepSix = () => {
       >
         <Form>
           <Warning text="At least 8 characters, with 1 uppercase letter, 1 lowercase letter and numbers" />
-          <Input
-            title="Password"
-            type="password"
-            name="password"
-            id="password"
-          />
-          <Input
-            title="Confirm password"
-            type="password"
-            name="confirmPassword"
-            id="cPassword"
-          />
+          <div className="w-full flex flex-col gap-[20px]">
+            <Input
+              title="Password"
+              type="password"
+              name="password"
+              id="password"
+            />
+            <Input
+              title="Confirm password"
+              type="password"
+              name="confirmPassword"
+              id="cPassword"
+            />
+          </div>
           <button type="submit" className="btn mt-10">
             Continue
           </button>
         </Form>
       </Formik>
-      <StepBackButton/>
+      <StepBackButton />
     </StepBody>
   );
 };

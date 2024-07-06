@@ -32,7 +32,7 @@ const StepThree = () => {
         validationSchema={FormSchema}
         onSubmit={handleSubmit}
       >
-        <Form>
+        <Form className="flex flex-col gap-[20px] w-full">
           <Input title="First Name" name="firstName" id="firstName" />
           <Input title="Last Name" name="lastName" id="lastName" />
           <button type="submit" className="btn mt-10">

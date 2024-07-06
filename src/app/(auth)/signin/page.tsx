@@ -31,8 +31,7 @@ const ValidationSchema = Yup.object().shape({
         return emailRegex.test(value) || phoneRegex.test(value);
       }
     ),
-  password: Yup.string()
-  .required("Password is required"),
+  password: Yup.string().required("Password is required"),
 });
 
 const Page = () => {
@@ -57,6 +56,8 @@ const Page = () => {
       toast.error("Something went wrong");
     }
   };
+
+
 
   return (
     <>
