@@ -80,6 +80,11 @@ const StripeContainer = () => {
         throw new Error("Failed to create payment intent.");
       }
 
+      const data = await response.json();
+      if (!data.success) {
+        return toast.error("Invalid card credential");
+      }
+
       const object = {
         ...user,
         creditUp,
@@ -104,15 +109,13 @@ const StripeContainer = () => {
 
       const resData = await confirm.json();
 
-      const subscription = await response.json();
-      console.log(subscription);
-
       Cookies.set("token", resData.token);
       toast.success("Payment successful");
       router.push("/");
     } catch (error: any) {
       toast.error("Something went wrong while processing this payment");
       // setError(`Error: ${error.message || ""}`);
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -180,7 +183,7 @@ const StripeContainer = () => {
         <span className="text-[13px] text-gray-300">or</span>
         <div className="flex items-center justify-center gap-[50px]">
           <PayWithGoogle />
-          {/* <PayWithApple />  */}
+          {/* <PayWithApple /> */}
         </div>
       </div>
     </>

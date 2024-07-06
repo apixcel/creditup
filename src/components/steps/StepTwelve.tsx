@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import StepBody from "../shared/StepBody";
 import Warning from "../shared/Warning";
 import Button from "./Button";
+import StepBackButton from "./StepBackButton";
 
 const validationSchema = Yup.object().shape({
   date: Yup.date()
@@ -61,6 +62,7 @@ const StepTwelve = () => {
           </Form>
         )}
       </Formik>
+      <StepBackButton />
     </StepBody>
   );
 };

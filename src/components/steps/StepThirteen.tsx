@@ -2,6 +2,7 @@
 import StepBody from "../shared/StepBody";
 import Warning from "../shared/Warning";
 import StripeWrapper from "../stripe/StripeWrapper";
+import StepBackButton from "./StepBackButton";
 
 const StepThirteen = () => {
   return (
@@ -11,6 +12,7 @@ const StepThirteen = () => {
         className="!mb-[20px]"
       />
       <StripeWrapper />
+      <StepBackButton />
     </StepBody>
   );
 };

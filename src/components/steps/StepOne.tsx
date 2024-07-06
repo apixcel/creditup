@@ -4,26 +4,35 @@ import { setCustomerDetailDescribe } from "@/redux/features/customer-detail/cust
 import { useAppDispatch } from "@/redux/hook";
 import { useState } from "react";
 import StepBody from "../shared/StepBody";
+import StepBackButton from "./StepBackButton";
 
 const StepOne = () => {
   const [currentItem, setCurrentItem] = useState<string>("");
   const dispatch = useAppDispatch();
-
+  // Home owner
+  // Private Renting
+  // Council Tenant
+  // Living with parents
+  // Other
   const describeItems = [
     {
       value: "I plan on buying a house",
     },
     {
-      value: "I plan on buying a house 2",
+      value: "I want to improve my creditworthiness",
     },
     {
-      value: "I plan on buying a house 3",
+      value:
+        "I want to have access to more disposable income at the end of each month",
     },
     {
-      value: "I plan on buying a house 4",
+      value: "I keep getting turned down for credit",
     },
     {
-      value: "I plan on buying a house 5",
+      value: "Lenders keep harassing me for more money",
+    },
+    {
+      value: "My problem debts have negatively impacted my mental health.",
     },
   ];
 

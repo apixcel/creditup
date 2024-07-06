@@ -57,7 +57,7 @@ const Page = () => {
         router.push("/");
       }
     } catch (error: any) {
-      console.log(error);
+      toast.error("Something went wrong");
     }
   };
 
