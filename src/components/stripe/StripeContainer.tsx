@@ -117,7 +117,7 @@ const StripeContainer = () => {
       const resData = await confirm.json();
 
       Cookies.set("token", resData.token);
-      toast.success("Payment successful");
+      toast.success("congratulations your Creditup service is now ACTIVE!");
       dispatch(resetState(undefined));
       router.push("/");
     } catch (error: any) {
