@@ -52,6 +52,7 @@ const StepTwelve = () => {
                 onChange={(date: any) => setFieldValue("date", date)}
                 dateFormat="dd/MM/yyyy"
                 placeholderText="dd/mm/yyyy"
+                minDate={new Date()} // Disable previous dates
                 className={`${
                   errors.date && touched.date ? "input-error" : ""
                 } inputPrimary`}

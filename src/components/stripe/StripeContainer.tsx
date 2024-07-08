@@ -1,4 +1,5 @@
 "use client";
+import { resetState } from "@/redux/features/customer-detail/customerDetailSlice";
 import { useAppSelector } from "@/redux/hook";
 import { BASEURL } from "@/utils/fetchData";
 import {
@@ -11,12 +12,14 @@ import {
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Toaster, toast } from "sonner";
 import Button from "../steps/Button";
 import PayWithGoogle from "../steps/PayWithGoogle";
 // import PayWithGoogle from "../steps/PayWithGoogle";
 
 const StripeContainer = () => {
+  const dispatch = useDispatch();
   const { customerDetail: customer_details } = useAppSelector(
     (state) => state.customer
   );
@@ -72,7 +75,11 @@ const StripeContainer = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, paymentMethodId: paymentMethod.id }),
+        body: JSON.stringify({
+          email,
+          paymentMethodId: paymentMethod.id,
+          date: customerDetail.paymentDate,
+        }),
       });
 
       if (!response.ok) {
@@ -111,6 +118,7 @@ const StripeContainer = () => {
 
       Cookies.set("token", resData.token);
       toast.success("Payment successful");
+      dispatch(resetState(undefined));
       router.push("/");
     } catch (error: any) {
       toast.error("Something went wrong while processing this payment");

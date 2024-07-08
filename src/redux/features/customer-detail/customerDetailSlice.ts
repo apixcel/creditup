@@ -181,6 +181,10 @@ const customerSlice = createSlice({
     setCircumstances(state, action: PayloadAction<Circumstances>) {
       state.circumstances = action.payload;
     },
+
+    resetState(state, action) {
+      return CustomerInfo;
+    },
   },
 });
 
@@ -201,6 +205,7 @@ export const {
   resetStep,
   setCircumstances,
   decreaseStep,
+  resetState,
 } = customerSlice.actions;
 
 export default customerSlice.reducer;

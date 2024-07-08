@@ -12,7 +12,7 @@ import StepBackButton from "./StepBackButton";
 
 const FormSchema = Yup.object().shape({
   phone: Yup.string()
-    .matches(/^\+?\d{10,14}$/, "Phone number is not valid")
+    .matches(/^\d{11}$/, "Phone number is not valid") // matches exactly 11 digits
     .required("You must enter the phone number"),
 });
 
