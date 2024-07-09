@@ -6,7 +6,6 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import RedNote from "../shared/RedNote";
 import StepBody from "../shared/StepBody";
-import Warning from "../shared/Warning";
 import Button from "./Button";
 import Input from "./Input";
 import StepBackButton from "./StepBackButton";
@@ -53,7 +52,6 @@ const StepEight = () => {
         onSubmit={handleSubmit}
       >
         <Form>
-          <Warning text="Put in your postcode and we'll find your address" />
           <RedNote text="Postcode, Building number, Sub building name or Building name, Street name, Town/city, County is required, Please enter manually" />
           <div className="flex flex-col gap-[20px]">
             <Input

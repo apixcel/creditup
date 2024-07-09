@@ -80,9 +80,9 @@ export const Menu = ({
               </span>
             </button>
           </Link>
-          <Link href={"/signin"} className="text-[16px] text-white">
+          {/* <Link href={"/signin"} className="text-[16px] text-white">
             Log in
-          </Link>
+          </Link> */}
         </div>
         <button
           onClick={toggleMenu}

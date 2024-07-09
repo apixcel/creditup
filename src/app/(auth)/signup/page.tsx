@@ -17,7 +17,7 @@ import { useAppSelector } from "@/redux/hook";
 
 const Steps = () => {
   const { step } = useAppSelector((state) => state.customer);
-  // let step = 11;
+  // let step = 8;
   return (
     <div className="">
       {step === 1 && <StepOne />}

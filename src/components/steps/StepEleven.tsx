@@ -190,14 +190,19 @@ const StepEleven = () => {
                     What is your outstanding balance?
                   </label>
                   <div className="w-full">
-                    <Field
-                      type="number"
-                      id={`outstandingBalance${i + 1}`}
-                      name={`outstandingBalance${i + 1}`}
-                      // placeholder={placeholder || ""}
-                      min={"0"}
-                      className="inputPrimary"
-                    />
+                    <div className="w-full flex items-center justify-start gap-[5px] inputPrimary !pl-[0] overflow-hidden">
+                      <span className="h-full bg-slate-100 px-[15px] center font-[500]">
+                        £
+                      </span>
+                      <Field
+                        type="number"
+                        id={`outstandingBalance${i + 1}`}
+                        name={`outstandingBalance${i + 1}`}
+                        // placeholder={placeholder || ""}
+                        min={"0"}
+                        className="w-full outline-none"
+                      />
+                    </div>
                     <ErrorMessage
                       name={`outstandingBalance${i + 1}`}
                       component="div"
@@ -213,14 +218,19 @@ const StepEleven = () => {
                     How much do you contribute towards {lenderNames[i] || ""}?
                   </label>
                   <div className="w-full">
-                    <Field
-                      type="number"
-                      id={`contribute${i + 1}`}
-                      name={`contribute${i + 1}`}
-                      min={"0"}
-                      // placeholder={placeholder || ""}
-                      className="inputPrimary"
-                    />
+                    <div className="w-full flex items-center justify-start gap-[5px] inputPrimary !pl-[0] overflow-hidden">
+                      <span className="h-full bg-slate-100 px-[15px] center font-[500]">
+                        £
+                      </span>
+                      <Field
+                        type="number"
+                        id={`contribute${i + 1}`}
+                        name={`contribute${i + 1}`}
+                        min={"0"}
+                        // placeholder={placeholder || ""}
+                        className="w-full outline-none"
+                      />
+                    </div>
                     <ErrorMessage
                       name={`contribute${i + 1}`}
                       component="div"
